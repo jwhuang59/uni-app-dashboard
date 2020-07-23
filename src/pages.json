@@ -1,0 +1,38 @@
+{
+    "easycom": {
+        "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+    },
+    "pages": [
+        {
+            "path": "pages/home/index",
+            "style": {
+                "navigationBarTitleText": "首页"
+            }
+        },
+        {
+            "path": "pages/order/index",
+            "style": {
+                "navigationBarTitleText": "订单"
+            }
+        },
+        {
+            "path": "pages/ucharts/index",
+            "style": {
+                "navigationBarTitleText": "ucharts"
+            }
+        },
+        {
+            "path": "pages/panel/index",
+            "style": {
+                "navigationBarTitleText": "小锅数坊",
+                "enablePullDownRefresh": true
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    }
+}

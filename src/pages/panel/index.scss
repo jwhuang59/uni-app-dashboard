@@ -1,0 +1,74 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+	.flex{width:100%;display: flex;flex-direction: column;align-items: center;justify-content: center;}
+	.header{width:100%}
+    .sales_volume{width:500rpx;height:240rpx;display:flex;flex-direction: column;justify-content: center;align-items: center;background:#0091FF;box-shadow:0 10rpx 24rpx 0 #E3EDFC;border-radius:10rpx;margin:0 auto}
+    .sales_volume .sales_num{font-size:44rpx;color:#fff;margin-bottom:30rpx;}
+    .sales_volume .sales_text{font-size:36rpx;color:#fff;}
+	
+	.other_volume{width:100%;display: flex;flex-direction: row;justify-content: space-between;align-items: center;padding:30rpx;box-sizing: border-box;}
+	.other_volume>view{width:300rpx;height:180rpx;box-shadow:0 10rpx 24rpx 0 #E3EDFC;border-radius:10rpx;display: flex;flex-direction: column;justify-content: center;align-items: center;}
+	.other_volume>view text{font-size:42rpx;font-weight:bold;}
+	.other_volume>view label{font-size:32rpx;margin-top:10rpx;font-weight:bold;}
+	.report_area{width:100%;}
+	.report_area .report_title{width:100%;height:45rpx;line-height:45rpx;font-weight: bold;font-size:32rpx;color:#1B1B1B;position: relative;margin:50rpx 0;text-align: center;}
+	.report_area .report_title::after{content:"";width:100rpx;height:2rpx;position:absolute;left:150rpx;top:50%;transform: translate(0,-50%);background:#979797}
+	.report_area .report_title::before{content:"";width:100rpx;height:2rpx;position:absolute;right:150rpx;top:50%;transform: translate(0,-50%);background:#979797}
+	.report_area .report_menu{display: flex;flex-direction: row;justify-content: space-between;padding:0 30rpx;}
+	.report_area .report_menu .report_lis{width:150rpx;height:60rpx;line-height:60rpx;font-size:28rpx;font-weight:500;color:#1B1B1B;box-shadow:0 10rpx 24rpx 0 #E3EDFC;border-radius:10rpx;text-align:center;}
+	.report_area .report_menu .report_lis.active{color:#fff;background:#0091FF}
+
+	.body_container{width:100%;display: flex;flex-direction: column;justify-content: flex-start;align-items: center;}
+	.body_container swiper{width:100%;height:1500rpx;}
+
+	.order{padding:30rpx;}
+	.order_info{display:flex;flex-flow: row wrap;justify-content: space-between;align-items: center;}
+
+	.order_info>view{width:330rpx;height:170rpx;position: relative;margin-bottom:30rpx;}
+	.order_info>view image{width:330rpx;height:170rpx;position:absolute;left:0;top:0}
+	.order_info>view label{color:#fff;font-size:28rpx;position:absolute;top:30rpx;left:30rpx;}
+	.order_info>view text{color:#fff;font-size:40rpx;position:absolute;bottom:30rpx;left:30rpx;}
+
+	.order_chart{width:100%;margin:30rpx 0}
+	.qiun-charts{width: 650rpx; height:300rpx;background-color: #FFFFFF;}
+	.charts-rotate{width: 650rpx; height:300rpx;background-color: #FFFFFF;}
+	
+	// 表格数据
+	.order_table{width:100%;display: flex;flex-direction: row;justify-content: space-between;}
+	.order_table .table_left{width:20%;border-bottom-left-radius: 16rpx;border-top-left-radius: 16rpx;}
+	.table_left .table_bar{height:100rpx;display: flex;flex-direction: row;align-items: center;justify-content: center;background:#0091FF;border-bottom:1rpx solid #E1E2EA;box-sizing: border-box;}
+	.table_bar label{font-size:28rpx;color:#fff;}
+	.order_table .table_right{width:80%}
+	scroll-view::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+		color: transparent;
+	}
+	.table_content{width:900rpx;}
+	.table_content>view{height:100rpx;}
+	.table_content .table_title{display: flex;flex-direction: row;justify-content: flex-start;align-items: center;font-size:28rpx;}
+	.table_content .table_val{display: flex;flex-direction: row;justify-content: flex-start;align-items: center;font-size:28rpx;}
+	.table_content .table_title>view{background:#31a7ff;}
+	.table_content .table_val>view{background:#dfe6fd;}
+	.table_content .table_title>view{width:250rpx;height:100rpx;border-left:1rpx solid #E1E2EA;display: flex;flex-direction: column;justify-content: center;align-items: center;color:#fff}
+	.table_content .table_val>view{width:250rpx;height:100rpx;border-left:1rpx solid #E1E2EA;display: flex;flex-direction: row;justify-content: center;align-items: center;color:#0091FF}
+	.table_content .table_title>view label{font-size:28rpx;}
+	.table_content .table_title>view text{font-size:20rpx;}
+	.table_content .table_val>view text{font-size:32rpx;}
+	.table_content .table_val.color>view{background: #fff;}
+
+
+
+	// #canvasColumn{
+	// 	width: 750rpx;
+	// 	height: 300rpx;
+	// }
+	// #showCurveChart{
+	// 	width: 750rpx;
+	// 	height: 300rpx;
+	// }
+}

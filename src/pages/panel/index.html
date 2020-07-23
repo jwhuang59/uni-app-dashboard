@@ -1,0 +1,256 @@
+<view class="content">
+    <view class="flex">
+        <view class="header">
+            <view class="time_slot">
+
+            </view>
+            <view class="sales_volume">
+                <view class="sales_num">
+                    737,262,675.00
+                </view>
+                <view class="sales_text">
+                    <!-- <image url=""></image> -->
+                    <text>总销售额</text>
+                </view>
+            </view>
+            <view class="other_volume">
+                <view class="sales_text">
+                    <view class="lastweek">
+                        <text>35.26%</text>
+                        <!-- <image url=""></image> -->
+                    </view>
+                    <label>同比上周</label>
+                </view>
+                <view class="sales_text">
+                    <text>3587</text>
+                    <label>在营门店</label>
+                </view>
+            </view>
+        </view>
+        <view class="report_area">
+            <view class="report_title">锅圈运营报告</view>
+            <view class="report_menu">           
+                <view :class="[index == current ? 'active' : '','report_lis']" v-for="(item,index) in reportText" :key="index" @click="switchTab" :data-id=index>{{item}}</view>
+            </view>
+        </view>
+        <view class="body_container">
+            <swiper class="swiper" @change="changeReport" :current="current" :duration="300" >
+                 <!-- @touchmove.stop="" -->
+                <swiper-item  class="swiper-no-swiping"> 
+                    <scroll-view class="" scroll-x="false" scroll-y="true" upper-threshold="50" lower-threshold="50" 
+                        scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                        <view class="order">
+                            <view class="order_info">
+                                <view class="order_count">
+                                    <image src="../../static/images/order_bg1.png"></image>
+                                    <label>总订单数</label>
+                                    <text>2,372,625</text>
+                                </view>
+                                <view class="order_count">
+                                    <image src="../../static/images/order_bg2.png"></image>
+                                    <label>对比昨日</label>
+                                    <text>35.26%</text>
+                                </view>
+                                <view class="order_count">
+                                    <image src="../../static/images/order_bg3.png"></image>
+                                    <label>店均订单数</label>
+                                    <text>372,625</text>
+                                </view>
+                                <view class="order_count">
+                                    <image src="../../static/images/order_bg4.png"></image>
+                                    <label>店均销售额</label>
+                                    <text>2,372,625.00</text>
+                                </view>
+                            </view>
+                            <view class="order_chart">
+                                <view class="qiun-charts">
+                                    <canvas canvas-id="showBarChart" id="showBarChart" class="charts-rotate" @touchstart="touchColumn" width="100%" height="300"></canvas>
+                                </view>
+                            </view>
+                            <view class="order_table">
+                                <view class="table_left">
+                                    <view class="table_bar">
+                                        <label>订单类型</label>
+                                    </view>
+                                    <view class="table_bar">
+                                        <label>线上订单</label>
+                                    </view>
+                                    <view class="table_bar">
+                                        <label>线下订单</label>
+                                    </view>
+                                    <view class="table_bar">
+                                        <label>渠道订单</label>
+                                    </view>
+                                </view>
+                                <view class="table_right">
+                                    <scroll-view class="" show-scrollbar="true" scroll-x="true" scroll-y="false" upper-threshold="50"
+                                        lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false"
+                                        enable-back-to-top="false">
+                                        <view class="table_content">
+                                            <view class="table_title">
+                                                <view>
+                                                    <label>订单数量</label>
+                                                    <text>(个)</text>
+                                                </view>
+                                                <view>
+                                                    <label>销售总额</label>
+                                                    <text>(元)</text>
+                                                </view>
+                                                <view>
+                                                    <label>客单价</label>
+                                                    <text>(元)</text>
+                                                </view>
+                                                <view>
+                                                    <label>订单数占比</label>
+                                                    <!-- <image></image> -->
+                                                </view>
+                                                <view>
+                                                    <label>销售额占比</label>
+                                                    <!-- <image></image> -->
+                                                </view>
+                                                
+                                            </view>
+                                            <view class="table_val">
+                                                <view><text>564</text></view>
+                                                <view><text>452</text></view>
+                                                <view><text>20%</text></view>
+                                                <view><text>60%</text></view>
+                                                <view><text>12%</text></view>
+                                            </view>
+                                            <view class="table_val color">
+                                                <view><text>564</text></view>
+                                                <view><text>452</text></view>
+                                                <view><text>20%</text></view>
+                                                <view><text>60%</text></view>
+                                                <view><text>12%</text></view>
+                                            </view>
+                                            <view class="table_val">
+                                                <view><text>564</text></view>
+                                                <view><text>452</text></view>
+                                                <view><text>20%</text></view>
+                                                <view><text>60%</text></view>
+                                                <view><text>12%</text></view>
+                                            </view>
+                                        </view>
+                                    </scroll-view>
+                                </view>
+
+                            </view>
+    
+                        </view>
+                    </scroll-view>
+                    
+                </swiper-item>
+                <swiper-item>
+                    <scroll-view class="" scroll-x="false" scroll-y="true" upper-threshold="50" lower-threshold="50" 
+                        scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                        <view class="customer">
+
+
+
+                        </view>
+                    </scroll-view>
+                </swiper-item>
+                <swiper-item>
+                    <view class="conversion">
+
+
+                    </view>
+                </swiper-item>
+                <swiper-item>
+                    <view class="activity">
+
+
+
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+
+
+
+        <!-- <view class="qiun-charts-rotate">
+            <canvas canvas-id="showBarChart" id="showBarChart" class="charts-rotate" @touchstart="touchColumn"></canvas>
+        </view> -->
+        <!-- <view class="qiun-charts-rotate">
+            <canvas canvas-id="showCurveChart" id="showCurveChart" class="charts-rotate" @touchstart="touchArea"></canvas>
+        </view>
+        <view class="table_container">
+            <view class="table_left">
+                <view class="table_bar">
+                    <label></label>
+                    <text></text>
+                </view>
+                <view class="table_bar">
+                    <label>线上订单</label>
+                    <text>4956</text>
+                </view>
+                <view class="table_bar">
+                    <label>线下订单</label>
+                    <text>4956</text>
+                </view>
+                <view class="table_bar">
+                    <label>渠道订单</label>
+                    <text>4956</text>
+                </view>
+            </view>
+            <view class="table_right">
+                <scroll-view class="" show-scrollbar="true" scroll-x="true" scroll-y="false" upper-threshold="50"
+                    lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false"
+                    enable-back-to-top="false">
+                    <view class="table_content">
+                        <view class="table_title">
+                            <label>销售总额</label>
+                            <label>客单价</label>
+                            <label>订单数占比</label>
+                            <label>销售额占比</label>
+                            <label>周同比</label>
+                            <label>日环比</label>
+                        </view>
+                        <view class="table_val">
+                            <text>564</text>
+                            <text>452</text>
+                            <text>20%</text>
+                            <text>60%</text>
+                            <text>12%</text>
+                            <text>59%</text>
+                        </view>
+                        <view class="table_val">
+                            <text>564</text>
+                            <text>452</text>
+                            <text>20%</text>
+                            <text>60%</text>
+                            <text>12%</text>
+                            <text>59%</text>
+                        </view>
+                        <view class="table_val">
+                            <text>564</text>
+                            <text>452</text>
+                            <text>20%</text>
+                            <text>60%</text>
+                            <text>12%</text>
+                            <text>59%</text>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+
+        <view class="select_date">
+            <view class="uni-list">
+                <view class="uni-list-cell">
+                    <view class="uni-list-cell-left">
+                        当前选择
+                    </view>
+                    <view class="uni-list-cell-db">
+                        <picker @change="bindChange" :value="index" :range="[lastMonth,timeSlot]" mode="multiSelector">
+                            <view class="uni-input">{{defaultTime}}</view>
+                        </picker>
+                    </view>
+                </view>
+            </view>
+        </view> -->
+
+
+    </view>
+</view>

@@ -1,0 +1,10 @@
+<view class="content">
+    <image class="logo" src="/static/logo.png"></image>
+    <view>
+        <text class="title">id:{{ id }}</text>
+    </view>
+    <view>
+        <text class="title" @click="clickHandler">回首页</text>
+    </view>
+    <u-action-sheet :list="list" v-model="show"></u-action-sheet>
+</view>
