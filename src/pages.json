@@ -10,22 +10,9 @@
             }
         },
         {
-            "path": "pages/order/index",
-            "style": {
-                "navigationBarTitleText": "订单"
-            }
-        },
-        {
-            "path": "pages/ucharts/index",
-            "style": {
-                "navigationBarTitleText": "ucharts"
-            }
-        },
-        {
             "path": "pages/panel/index",
             "style": {
-                "navigationBarTitleText": "小锅数坊",
-                "enablePullDownRefresh": true
+                "navigationBarTitleText": "小锅数坊"
             }
         }
     ],

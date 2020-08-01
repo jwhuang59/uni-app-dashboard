@@ -3,11 +3,7 @@ module.exports = {
     env: {
         node: true
     },
-    extends: [
-        '@vue/standard',
-        'plugin:vue/essential',
-        'plugin:prettier/recommended'
-    ],
+    extends: ['@vue/standard', 'plugin:vue/essential', 'plugin:prettier/recommended'],
     plugins: ['prettier'],
     globals: {
         uni: true

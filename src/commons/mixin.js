@@ -29,6 +29,15 @@ export default {
         },
 
         /**
+         * 关闭当前页面跳转
+         * @param {路径名称} name
+         */
+        redirect(name) {
+            const route = { name };
+            this.$Router.replace(route);
+        },
+
+        /**
          * Tab级跳转
          * @param {路径名称} name
          */

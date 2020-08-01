@@ -9,7 +9,6 @@ BaseUrl = '/api';
 // #endif
 
 // #ifdef MP-WEIXIN
-// const BaseUrl = 'https://apidev.zzgqsh.com';
 BaseUrl = process.env.VUE_APP_BASE_URL;
 // #endif
 
@@ -21,13 +20,9 @@ let httpCount = 0;
  * @param {接口入参} data
  */
 const request = function (name = '', data = {}) {
-    let {
-        url,
-        method = 'post',
-        header = { 'content-type': 'application/json' },
-        pem = false,
-        sld = true
-    } = getApi(name);
+    let { url, method = 'post', header = { 'content-type': 'application/json' }, pem = false, sld = true } = getApi(
+        name
+    );
     header = getHeader(header, data);
     url = BaseUrl + url;
     return new Promise((resolve, reject) => {
@@ -57,7 +52,7 @@ const request = function (name = '', data = {}) {
             complete() {
                 httpCount--;
                 if (httpCount === 0) {
-                    uni.hideLoading();
+                    // uni.hideLoading();
                 }
             }
         });

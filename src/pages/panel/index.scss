@@ -3,72 +3,1049 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
-	.flex{width:100%;display: flex;flex-direction: column;align-items: center;justify-content: center;}
-	.header{width:100%}
-    .sales_volume{width:500rpx;height:240rpx;display:flex;flex-direction: column;justify-content: center;align-items: center;background:#0091FF;box-shadow:0 10rpx 24rpx 0 #E3EDFC;border-radius:10rpx;margin:0 auto}
-    .sales_volume .sales_num{font-size:44rpx;color:#fff;margin-bottom:30rpx;}
-    .sales_volume .sales_text{font-size:36rpx;color:#fff;}
-	
-	.other_volume{width:100%;display: flex;flex-direction: row;justify-content: space-between;align-items: center;padding:30rpx;box-sizing: border-box;}
-	.other_volume>view{width:300rpx;height:180rpx;box-shadow:0 10rpx 24rpx 0 #E3EDFC;border-radius:10rpx;display: flex;flex-direction: column;justify-content: center;align-items: center;}
-	.other_volume>view text{font-size:42rpx;font-weight:bold;}
-	.other_volume>view label{font-size:32rpx;margin-top:10rpx;font-weight:bold;}
-	.report_area{width:100%;}
-	.report_area .report_title{width:100%;height:45rpx;line-height:45rpx;font-weight: bold;font-size:32rpx;color:#1B1B1B;position: relative;margin:50rpx 0;text-align: center;}
-	.report_area .report_title::after{content:"";width:100rpx;height:2rpx;position:absolute;left:150rpx;top:50%;transform: translate(0,-50%);background:#979797}
-	.report_area .report_title::before{content:"";width:100rpx;height:2rpx;position:absolute;right:150rpx;top:50%;transform: translate(0,-50%);background:#979797}
-	.report_area .report_menu{display: flex;flex-direction: row;justify-content: space-between;padding:0 30rpx;}
-	.report_area .report_menu .report_lis{width:150rpx;height:60rpx;line-height:60rpx;font-size:28rpx;font-weight:500;color:#1B1B1B;box-shadow:0 10rpx 24rpx 0 #E3EDFC;border-radius:10rpx;text-align:center;}
-	.report_area .report_menu .report_lis.active{color:#fff;background:#0091FF}
 
-	.body_container{width:100%;display: flex;flex-direction: column;justify-content: flex-start;align-items: center;}
-	.body_container swiper{width:100%;height:1500rpx;}
+    .flex {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
-	.order{padding:30rpx;}
-	.order_info{display:flex;flex-flow: row wrap;justify-content: space-between;align-items: center;}
+        .header {
+            width: 100%;
+            .time_slot {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .refresh {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                margin-right: 15rpx;
+                // padding: 10rpx;
 
-	.order_info>view{width:330rpx;height:170rpx;position: relative;margin-bottom:30rpx;}
-	.order_info>view image{width:330rpx;height:170rpx;position:absolute;left:0;top:0}
-	.order_info>view label{color:#fff;font-size:28rpx;position:absolute;top:30rpx;left:30rpx;}
-	.order_info>view text{color:#fff;font-size:40rpx;position:absolute;bottom:30rpx;left:30rpx;}
+                text {
+                    font-size: 28rpx;
+                    color: #1b1b1b;
+                }
+                image {
+                    width: 42rpx;
+                    height: 40rpx;
+                }
+            }
+            .time_wrapper {
+                width: 670rpx;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                padding: 30rpx 0 30rpx 10rpx;
+                .model{font-size:28rpx;}
+            }
+            .radio_flex,
+            .radio_group {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            .current_time {
+                margin-left: 20rpx;
+                .current_time_text {
+                    color: #1b1b1b;
+                }
+            }
+            radio {
+                transform: scale(0.7);
+            }
 
-	.order_chart{width:100%;margin:30rpx 0}
-	.qiun-charts{width: 650rpx; height:300rpx;background-color: #FFFFFF;}
-	.charts-rotate{width: 650rpx; height:300rpx;background-color: #FFFFFF;}
-	
-	// 表格数据
-	.order_table{width:100%;display: flex;flex-direction: row;justify-content: space-between;}
-	.order_table .table_left{width:20%;border-bottom-left-radius: 16rpx;border-top-left-radius: 16rpx;}
-	.table_left .table_bar{height:100rpx;display: flex;flex-direction: row;align-items: center;justify-content: center;background:#0091FF;border-bottom:1rpx solid #E1E2EA;box-sizing: border-box;}
-	.table_bar label{font-size:28rpx;color:#fff;}
-	.order_table .table_right{width:80%}
-	scroll-view::-webkit-scrollbar {
-		width: 0;
-		height: 0;
-		color: transparent;
-	}
-	.table_content{width:900rpx;}
-	.table_content>view{height:100rpx;}
-	.table_content .table_title{display: flex;flex-direction: row;justify-content: flex-start;align-items: center;font-size:28rpx;}
-	.table_content .table_val{display: flex;flex-direction: row;justify-content: flex-start;align-items: center;font-size:28rpx;}
-	.table_content .table_title>view{background:#31a7ff;}
-	.table_content .table_val>view{background:#dfe6fd;}
-	.table_content .table_title>view{width:250rpx;height:100rpx;border-left:1rpx solid #E1E2EA;display: flex;flex-direction: column;justify-content: center;align-items: center;color:#fff}
-	.table_content .table_val>view{width:250rpx;height:100rpx;border-left:1rpx solid #E1E2EA;display: flex;flex-direction: row;justify-content: center;align-items: center;color:#0091FF}
-	.table_content .table_title>view label{font-size:28rpx;}
-	.table_content .table_title>view text{font-size:20rpx;}
-	.table_content .table_val>view text{font-size:32rpx;}
-	.table_content .table_val.color>view{background: #fff;}
+            .sales_volume {
+                width: 500rpx;
+                height: 240rpx;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                background: #0091ff;
+                box-shadow: 0 10rpx 24rpx 0 #e3edfc;
+                border-radius: 10rpx;
+                margin: 30rpx auto 0;
 
+                .sales_num {
+                    font-size: 44rpx;
+                    color: #fff;
+                    margin-bottom: 30rpx;
+                    font-weight: 600;
+                }
+                .sales_text {
+                    font-size: 36rpx;
+                    color: #fff;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    text {
+                        color: #fff;
+                        font-weight: 600;
+                    }
+                    image {
+                        width: 38rpx;
+                        height: 38rpx;
+                        margin-right: 10rpx;
+                    }
+                }
+            }
 
+            .other_volume {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                padding: 30rpx;
+                box-sizing: border-box;
+            }
+            .other_volume > view {
+                width: 300rpx;
+                height: 180rpx;
+                box-shadow: 0 10rpx 24rpx 0 #e3edfc;
+                border-radius: 10rpx;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                .down {
+                    color: #090;
+                }
+            }
+            .other_volume > view > view {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+            .other_volume > view image {
+                width: 30rpx;
+                height: 32rpx;
+            }
+            .other_volume > view text {
+                font-size: 42rpx;
+                color: #ea3e10;
+                font-weight: 600;
+            }
+            .other_volume > view label {
+                font-size: 32rpx;
+                margin-top: 10rpx;
+                font-weight: 600;
+            }
+        }
 
-	// #canvasColumn{
-	// 	width: 750rpx;
-	// 	height: 300rpx;
-	// }
-	// #showCurveChart{
-	// 	width: 750rpx;
-	// 	height: 300rpx;
-	// }
+        .report_area {
+            width: 100%;
+
+            .report_title {
+                width: 100%;
+                height: 45rpx;
+                line-height: 45rpx;
+                font-size: 32rpx;
+                color: #1b1b1b;
+                position: relative;
+                margin: 50rpx 0;
+                text-align: center;
+                font-weight: 600;
+            }
+            .report_title::after {
+                content: "";
+                width: 100rpx;
+                height: 2rpx;
+                position: absolute;
+                left: 150rpx;
+                top: 50%;
+                transform: translate(0, -50%);
+                background: #979797;
+            }
+            .report_title::before {
+                content: "";
+                width: 100rpx;
+                height: 2rpx;
+                position: absolute;
+                right: 150rpx;
+                top: 50%;
+                transform: translate(0, -50%);
+                background: #979797;
+            }
+            .report_menu {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 0 30rpx;
+
+                .report_lis {
+                    width: 150rpx;
+                    height: 65rpx;
+                    line-height: 65rpx;
+                    font-size: 28rpx;
+                    font-weight: 600;
+                    color: #1b1b1b;
+                    box-shadow: 0 10rpx 24rpx 0 #e3edfc;
+                    border-radius: 10rpx;
+                    text-align: center;
+                    color: #1b1b1b;
+                }
+                .report_lis.active {
+                    color: #fff;
+                    background: #0091ff;
+                }
+            }
+        }
+
+        .body_container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+
+            .report_content {
+                width: 100%;
+                margin-bottom: 30rpx;
+            }
+            .report_content > view {
+                display: none;
+            }
+            .report_content .show {
+                display: block;
+            }
+        }
+        // 订单分析
+        .order {
+            padding: 30rpx;
+
+            .order_info {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .order_info > view {
+                width: 330rpx;
+                height: 170rpx;
+                position: relative;
+                margin-bottom: 30rpx;
+                font-weight: 600;
+            }
+            .order_info > view > image {
+                width: 330rpx;
+                height: 170rpx;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .order_info > view image.white_arrow {
+                width: 30rpx;
+                height: 32rpx;
+                margin-left: 10rpx;
+            }
+            .order_info > view label {
+                color: #fff;
+                font-size: 28rpx;
+                position: absolute;
+                top: 30rpx;
+                left: 30rpx;
+            }
+            .order_info > view .contrast_yes {
+                color: #fff;
+                font-size: 40rpx;
+                position: absolute;
+                bottom: 30rpx;
+                left: 30rpx;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            .order_info > view text {
+                color: #fff;
+            }
+
+            // 订单表格数据
+            .order_table {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                .table_left {
+                    width: 150rpx;
+                    border-bottom-left-radius: 16rpx;
+                    border-top-left-radius: 16rpx;
+                }
+                .table_left .table_bar {
+                    width: 150rpx;
+                    height: 100rpx;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    background: #0091ff;
+                    border-bottom: 1rpx solid #e1e2ea;
+                    box-sizing: border-box;
+                }
+                
+                .table_bar label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_right {
+                    width: 540rpx;
+                }
+                scroll-view ::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                    color: transparent;
+                }
+                .table_content {
+                    width: 900rpx;
+                }
+                .table_content > view {
+                    height: 100rpx;
+                }
+                .table_content .table_title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_val {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_title > view {
+                    background: #31a7ff;
+                }
+                .table_content .table_val > view {
+                    background: #dfe6fd;
+                }
+                .table_content .table_title > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                }
+                .table_content .table_val > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    color: #0091ff;
+                }
+                .table_content .table_title > view label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_content .table_title > view text {
+                    font-size: 20rpx;
+                    color: #fff;
+                }
+                .table_content .table_val > view text {
+                    font-size: 32rpx;
+                    font-weight: 600;
+                    color: #0091ff;
+                }
+                .table_content .table_val.color > view {
+                    background: #fff;
+                }
+            }
+        }
+        // 客户分析
+        .customer {
+            padding: 30rpx;
+            .customer_info {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .customer_info > view {
+                width: 330rpx;
+                height: 170rpx;
+                position: relative;
+                font-weight: 600;
+            }
+            .customer_info > view image {
+                width: 330rpx;
+                height: 170rpx;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .customer_info > view label {
+                color: #fff;
+                font-size: 28rpx;
+                position: absolute;
+                top: 30rpx;
+                left: 30rpx;
+            }
+            .customer_info > view text {
+                color: #fff;
+                font-size: 40rpx;
+                position: absolute;
+                bottom: 30rpx;
+                left: 30rpx;
+            }
+
+            .customer_rate {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin: 30rpx 0;
+                .customer_rate_lis {
+                    width: 20%;
+                    height: 150rpx;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: center;
+                    box-shadow: 0 10rpx 24rpx 0 #e3edfc;
+                    border-radius: 10rpx;
+                    padding:20rpx 0;
+                    text {
+                        font-size: 28rpx;
+                        color: #e60c0c;
+                        font-weight: 600;
+                    }
+                    label {
+                        font-size: 24rpx;
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            // 客户表格数据
+            .customer_table {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                .table_left {
+                    width: 150rpx;
+                    border-bottom-left-radius: 16rpx;
+                    border-top-left-radius: 16rpx;
+                }
+                .table_left .table_bar {
+                    width: 150rpx;
+                    height: 100rpx;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    background: #0091ff;
+                    border-bottom: 1rpx solid #e1e2ea;
+                    box-sizing: border-box;
+                }
+                .table_bar label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_right {
+                    width: 80%;
+                }
+                scroll-view ::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                    color: transparent;
+                }
+                .table_content {
+                    width: 750rpx;
+                }
+                .table_content > view {
+                    height: 100rpx;
+                }
+                .table_content .table_title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_val {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_title > view {
+                    background: #31a7ff;
+                }
+                .table_content .table_val > view {
+                    background: #dfe6fd;
+                }
+                .table_content .table_title > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                }
+                .table_content .table_val > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    color: #0091ff;
+                }
+                .table_content .table_title > view label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_content .table_title > view text {
+                    font-size: 20rpx;
+                    color: #fff;
+                }
+                .table_content .table_val > view text {
+                    font-size: 32rpx;
+                    font-weight: 600;
+                    color: #0091ff;
+                }
+                .table_content .table_val.color > view {
+                    background: #fff;
+                }
+            }
+        }
+        // 转化分析
+        .conversion {
+            padding: 30rpx;
+
+            .conversion_info {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .conversion_info > view {
+                width: 330rpx;
+                height: 170rpx;
+                position: relative;
+                font-weight: 600;
+            }
+            .conversion_info > view > image {
+                width: 330rpx;
+                height: 170rpx;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .conversion_info > view image.white_arrow {
+                width: 30rpx;
+                height: 32rpx;
+                margin-left: 10rpx;
+            }
+            .conversion_info > view label {
+                color: #fff;
+                font-size: 28rpx;
+                position: absolute;
+                top: 30rpx;
+                left: 30rpx;
+            }
+            .conversion_info > view .contrast_yes {
+                color: #fff;
+                font-size: 40rpx;
+                position: absolute;
+                bottom: 30rpx;
+                left: 30rpx;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            .conversion_info > view text {
+                color: #fff;
+            }
+            // 转化表格数据
+            .conversion_table {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                .table_left {
+                    width: 150rpx;
+                    border-bottom-left-radius: 16rpx;
+                    border-top-left-radius: 16rpx;
+                }
+                .table_left .table_bar {
+                    width: 150rpx;
+                    height: 100rpx;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    background: #0091ff;
+                    border-bottom: 1rpx solid #e1e2ea;
+                    box-sizing: border-box;
+                }
+                .table_bar label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_right {
+                    width: 540rpx;
+                }
+                scroll-view ::-webkit-scrollbar {
+                    width: 0;
+                    height: 0;
+                    color: transparent;
+                }
+                .table_content {
+                    width: 750rpx;
+                }
+                .table_content > view {
+                    height: 100rpx;
+                }
+                .table_content .table_title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_val {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_title > view {
+                    background: #31a7ff;
+                }
+                .table_content .table_val > view {
+                    background: #dfe6fd;
+                }
+                .table_content .table_title > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                }
+                .table_content .table_val > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    color: #0091ff;
+                }
+                .table_content .table_title > view label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_content .table_title > view text {
+                    font-size: 20rpx;
+                    color: #fff;
+                }
+                .table_content .table_val > view text {
+                    font-size: 32rpx;
+                    font-weight: 600;
+                    color: #0091ff;
+                }
+                .table_content .table_val.color > view {
+                    background: #fff;
+                }
+            }
+        }
+        // 活动分析
+        .activity {
+            padding: 30rpx;
+
+            .activity_type {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+
+                .drop_down {
+                    margin-top: 30rpx;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    text {
+                        font-size: 32rpx;
+                        font-weight: 600;
+                    }
+                    image {
+                        width: 30rpx;
+                        height: 30rpx;
+                        margin-left: 10rpx;
+                    }
+                }
+                .activity_name {
+                    margin: 30rpx 0;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    image {
+                        width: 26rpx;
+                        height: 26rpx;
+                    }
+                    text {
+                        font-size: 28rpx;
+                        font-weight: 600;
+                        color: #ed4513;
+                        margin: 0 10rpx;
+                    }
+                    label {
+                        font-size: 22rpx;
+                        color: #a7a4a3;
+                        background: #d8d8d8;
+                        font-weight: 600;
+                        padding: 5rpx;
+                        border-radius: 10rpx;
+                    }
+                    .isGoing{
+                        background: #ed4513;
+                        color:#fff;
+                    }
+                }
+            }
+
+            .activity_info {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .activity_info > view {
+                width: 330rpx;
+                height: 170rpx;
+                position: relative;
+                font-weight: 600;
+            }
+            .activity_info > view image {
+                width: 330rpx;
+                height: 170rpx;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            .activity_info > view label {
+                color: #fff;
+                font-size: 28rpx;
+                position: absolute;
+                top: 30rpx;
+                left: 30rpx;
+            }
+            .activity_info > view text {
+                color: #fff;
+                font-size: 40rpx;
+                position: absolute;
+                bottom: 30rpx;
+                left: 30rpx;
+            }
+
+            .activity_info_other {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+                padding: 30rpx 0;
+            }
+
+            .activity_info_other > view {
+                width: 330rpx;
+                height: 80rpx;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                padding-left: 30rpx;
+            }
+            .activity_info_other > view label {
+                color: #1b1b1b;
+                font-size: 28rpx;
+                font-weight: 600;
+            }
+            .activity_info_other > view text {
+                color: #ed4513;
+                font-size: 40rpx;
+                font-weight: 600;
+            }
+
+            .activity_ranking {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                margin: 30rpx 0;
+            }
+            .activity_ranking > view {
+                width: 240rpx;
+                height: 180rpx;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                box-shadow: 0 10rpx 24rpx 0 #e3edfc;
+                border-radius: 10rpx;
+            }
+            .activity_ranking > view image {
+                width: 80rpx;
+                height: 80rpx;
+                position: absolute;
+                left: -40rpx;
+                top: -40rpx;
+            }
+            .activity_ranking > view label {
+                color: #1b1b1b;
+                font-size: 32rpx;
+                font-weight: 600;
+            }
+            .activity_ranking > view text {
+                color: #ed4513;
+                font-size: 32rpx;
+                font-weight: 600;
+                margin-top: 30rpx;
+            }
+            .activity_contrast {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                .contrast_header {
+                    width: 100%;
+                    height: 60rpx;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin: 30rpx 0;
+                    .contrast_title {
+                        height: 60rpx;
+                        line-height: 60rpx;
+                        font-size: 32rpx;
+                        color: #1b1b1b;
+                        font-weight: 600;
+                        position: relative;
+                        padding-left: 30rpx;
+                    }
+                    .contrast_title::after {
+                        content: "";
+                        width: 10rpx;
+                        height: 60rpx;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        background: #398aff;
+                    }
+                    .contrast_date_time {
+                        font-size: 28rpx;
+                        color: #1b1b1b;
+                        font-weight: 600;
+                    }
+                    .contrast_date_text {
+                        font-size: 24rpx;
+                        color: #1b1b1b;
+                        font-weight: 600;
+                        padding: 10rpx;
+                        border: 2rpx solid #1b1b1b;
+                        border-radius: 10rpx;
+                    }
+                    .select_option {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
+                        align-items: center;
+                    }
+                }
+            }
+
+            // 活动表格数据
+            .activity_table {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                .table_left {
+                    width: 150rpx;
+                    border-bottom-left-radius: 16rpx;
+                    border-top-left-radius: 16rpx;
+                }
+                .table_left .table_bar {
+                    width: 150rpx;
+                    height: 100rpx;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                    background: #0091ff;
+                    border-bottom: 1rpx solid #e1e2ea;
+                    box-sizing: border-box;
+                }
+                .table_bar label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_right {
+                    width: 540rpx;
+                }
+                // scroll-view ::-webkit-scrollbar {
+                //     width: 0;
+                //     height: 0;
+                //     color: transparent;
+                // }
+                .table_content {
+                    width: 540rpx;
+                }
+                .table_content > view {
+                    height: 100rpx;
+                }
+                .table_content .table_title {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_val {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-start;
+                    align-items: center;
+                    font-size: 28rpx;
+                }
+                .table_content .table_title > view {
+                    background: #31a7ff;
+                }
+                .table_content .table_val > view {
+                    background: #dfe6fd;
+                }
+                .table_content .table_title > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: #fff;
+                }
+                .table_content .table_val > view {
+                    width: 250rpx;
+                    height: 100rpx;
+                    border-left: 1rpx solid #e1e2ea;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    color: #0091ff;
+                }
+                .table_content .table_title > view label {
+                    font-size: 28rpx;
+                    color: #fff;
+                }
+                .table_content .table_title > view text {
+                    font-size: 20rpx;
+                    color: #fff;
+                }
+                .table_content .table_val > view text {
+                    font-size: 32rpx;
+                    font-weight: 600;
+                    color: #0091ff;
+                }
+                .table_content .table_val.color > view {
+                    background: #fff;
+                }
+            }
+        }
+    }
+    // 订单条形图
+    .showBarChart {
+        margin: 30rpx 0;
+    }
+    .showBarChart canvas {
+        width: 690rpx;
+    }
+    // 转化柱状图
+    .showBarChart0 {
+        margin: 60rpx 0 30rpx 0;
+    }
+    .showBarChart0 canvas {
+        width: 690rpx;
+    }
+    // 客户饼状图
+    .showPieChart {
+        margin: 30rpx 0;
+    }
+    .showPieChart canvas {
+        width: 690rpx;
+    }
+    // 活动折线图
+    .showCurveChart {
+        margin: 30rpx 0;
+    }
+    .showCurveChart canvas {
+        width: 690rpx;
+    }
+    .hide_calendar {
+        display: none;
+    }
+
+    // 表格圆角
+
+    .radius_top_left{
+                    
+        border-top-left-radius: 10rpx;
+    }
+    .radius_bottom_left{
+        border-bottom-left-radius: 10rpx;
+    }
+    .radius_top_right{
+                    
+        border-top-right-radius: 10rpx;
+    }
+    .radius_bottom_right{
+        border-bottom-right-radius: 10rpx;
+    }
 }

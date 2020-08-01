@@ -8,13 +8,6 @@ export default [
         }
     },
     {
-        path: '/pages/ucharts/index',
-        name: 'ucharts',
-        meta: {
-            title: 'ucharts'
-        }
-    },
-    {
         path: '/pages/panel/index',
         name: 'panel',
         meta: {

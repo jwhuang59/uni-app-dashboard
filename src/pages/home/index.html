@@ -1,40 +1,6 @@
 <view class="content">
-    <image class="logo" src="/static/logo.png"></image>
-    <view>
-        <text class="title">{{ title }}</text>
+    <view class="startup_wrapper">
+        <view class="img_top"><image webp :src="getImg('startup_top')"></image></view>
+        <view class="img_bottom"><image webp :src="getImg('startup_bottom')"></image></view>
     </view>
-    <view>
-        <text class="title">store: {{ shop.name }}</text>
-    </view>
-    <view>
-        <text class="title">filter: {{ date | dateFormatFilter }}</text>
-    </view>
-    <view>
-        <text class="title">iconfont:</text>
-        <text class="iconfont icongengduo"></text>
-    </view>
-    <view>
-        <text class="title">当前API地址:</text>
-        <text class="title">{{currentEnv}}</text>
-    </view>
-    <view>
-        <text class="title">当前环境:</text>
-        <text class="title">{{nodeEnv}}</text>
-    </view>
-    <view>
-        <text class="title">Tab级跳转:</text>
-        <u-button type="primary" @click="clickTabHandler('order')"
-            >去订单页</u-button
-        >
-    </view>
-    <view class="mt30">
-        <text class="title">页面级跳转:</text>
-        <u-button type="primary" @click="clickHandler('ucharts')"
-            >去uCharts页</u-button
-        >
-    </view>
-    <view class="mt30">
-        <image class="img" :src="getImg('adventPage')"></image>
-    </view>
-    <view class="bgimg"> </view>
 </view>
