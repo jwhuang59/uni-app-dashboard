@@ -57,7 +57,7 @@ export default {
         setTimeout(() => {
             this.getActivityList();
             this.getActivityAnalysis();
-        }, 2000);
+        }, 3000);
 
         // 下个整点刷新
         const nowTime = new Date();
@@ -162,6 +162,7 @@ export default {
 
             this.getPromiseAsyn(this.current);
         },
+        // 选择活动
         selectActivity(e) {
             uni.showLoading({
                 title: '加载中'
@@ -197,87 +198,82 @@ export default {
         },
         // 运营报告订单分布
         getOrderDistribution() {
-            return new Promise(resolve => {
-                this.structureQueue([this.getOrderStatistics(), this.getOrderAnalysis()]).then(res => {
-                    resolve(res);
-                });
-            });
+            this.structureQueue([this.getOrderStatistics(), this.getOrderAnalysis()]);
         },
         // 总订单数量
         getOrderStatistics() {
-            this.$request('orderStatistics', {
-                startTime: this.getStartTime,
-                endTime: this.getEndTime,
-                type: this.timeType
-            }).then(res => {
-                this.orderInfo = res.data;
-                _self.showBarChart('showBarChart', res.data.orderChartModel);
-            });
-        },
-        // 订单表格
-        getOrderAnalysis() {
-            this.$request('orderAnalysis', {
-                startTime: this.getStartTime,
-                endTime: this.getEndTime,
-                type: this.timeType
-            }).then(res => {
-                this.orderAnalysis = res.data;
-            });
-        },
-        // 运营报告客户分布
-        getCustomerDistribution() {
             return new Promise(resolve => {
-                this.structureQueue([this.getMemberAnalysis(), this.getMemberRetained()]).then(res => {
-                    resolve(res);
-                });
-            });
-        },
-        // 客户数据统计
-        getMemberAnalysis() {
-            this.$request('memberAnalysis', {
-                startTime: this.getStartTime,
-                endTime: this.getEndTime,
-                type: this.timeType
-            }).then(res => {
-                this.memberInfo = res.data;
-                const showPieChart = {};
-                showPieChart.series = res.data.memberDistributions;
-                _self.showPieChart('showPieChart', showPieChart);
-            });
-        },
-        // 客户留存率
-        getMemberRetained() {
-            this.$request('memberRetained', {
-                startTime: this.getStartTime,
-                endTime: this.getEndTime,
-                type: this.timeType
-            }).then(res => {
-                this.memberRetainedInfo = res.data;
-            });
-        },
-        // 运营报告转化分析
-        getConversionAnalysis() {
-            return new Promise(resolve => {
-                this.$request('conversionStatistics', {
+                this.$request('orderStatistics', {
                     startTime: this.getStartTime,
                     endTime: this.getEndTime,
                     type: this.timeType
                 }).then(res => {
-                    this.conversionInfo = res.data;
-                    _self.showBarChart0('showBarChart0', res.data.conversionChartAnalysis);
-                    resolve(true);
+                    this.orderInfo = res.data;
+                    _self.showBarChart('showBarChart', res.data.orderChartModel);
+                    resolve();
                 });
+            });
+        },
+        // 订单表格
+        getOrderAnalysis() {
+            return new Promise(resolve => {
+                this.$request('orderAnalysis', {
+                    startTime: this.getStartTime,
+                    endTime: this.getEndTime,
+                    type: this.timeType
+                }).then(res => {
+                    this.orderAnalysis = res.data;
+                    resolve();
+                });
+            });
+        },
+        // 运营报告客户分布
+        getCustomerDistribution() {
+            this.structureQueue([this.getMemberAnalysis(), this.getMemberRetained()]);
+        },
+        // 客户数据统计
+        getMemberAnalysis() {
+            return new Promise(resolve => {
+                this.$request('memberAnalysis', {
+                    startTime: this.getStartTime,
+                    endTime: this.getEndTime,
+                    type: this.timeType
+                }).then(res => {
+                    this.memberInfo = res.data;
+                    const showPieChart = {};
+                    showPieChart.series = res.data.memberDistributions;
+                    _self.showPieChart('showPieChart', showPieChart);
+                    resolve();
+                });
+            });
+        },
+        // 客户留存率
+        getMemberRetained() {
+            return new Promise(resolve => {
+                this.$request('memberRetained', {
+                    startTime: this.getStartTime,
+                    endTime: this.getEndTime,
+                    type: this.timeType
+                }).then(res => {
+                    this.memberRetainedInfo = res.data;
+                    resolve();
+                });
+            });
+        },
+        // 运营报告转化分析
+        getConversionAnalysis() {
+            this.$request('conversionStatistics', {
+                startTime: this.getStartTime,
+                endTime: this.getEndTime,
+                type: this.timeType
+            }).then(res => {
+                this.conversionInfo = res.data;
+                _self.showBarChart0('showBarChart0', res.data.conversionChartAnalysis);
             });
         },
         // 运营报告活动分析
         getActivityAnalysis() {
-            return new Promise(resolve => {
-                this.structureQueue([this.getActivityGraph(), this.getActivityInfo(), this.getActivityRanking()]).then(
-                    res => {
-                        resolve(res);
-                    }
-                );
-            });
+            this.structureQueue([this.getActivityGraph(), this.getActivityInfo(), this.getActivityRanking()]);
         },
         // 活动列表
         getActivityList() {
@@ -325,57 +321,56 @@ export default {
             });
         },
         // 消息队列
-        structureQueue(arr) {
-            return arr.reduce(function (total, item) {
+        structureQueue(messageArr) {
+            const promise = Promise.resolve();
+            return messageArr.reduce((total, item) => {
                 return total.then(res => {
                     return new Promise(resolve => {
-                        resolve(true);
+                        setTimeout(() => {
+                            resolve();
+                        }, 0);
                     });
                 });
-            }, Promise.resolve());
-
-            // return new Promise(resolve => {
-            //     Promise.all(arr).then(() => {
-            //         resolve(true);
-            //     });
-            // })
+            }, promise);
         },
         // 异步调用
+        AsynchronousCall(requestArr) {
+            return new Promise(resolve => {
+                Promise.all(requestArr).then(() => {
+                    uni.hideLoading();
+                    resolve();
+                });
+            });
+        },
+        // 异步请求流程
         getPromiseAsyn(current) {
             this.getSalesVolume().then(res => {
                 if (res) {
                     switch (current) {
                         case 0:
-                            this.getOrderDistribution().then(res => {
-                                if (res) {
-                                    uni.hideLoading();
-                                    this.structureQueue([this.getCustomerDistribution(), this.getConversionAnalysis()]);
-                                }
+                            this.AsynchronousCall([this.getOrderStatistics(), this.getOrderAnalysis()]).then(() => {
+                                this.structureQueue([this.getCustomerDistribution(), this.getConversionAnalysis()]);
                             });
 
                             break;
                         case 1:
-                            this.getCustomerDistribution().then(() => {
-                                uni.hideLoading();
-                                return this.structureQueue([this.getOrderDistribution(), this.getConversionAnalysis()]);
+                            this.AsynchronousCall([this.getMemberAnalysis(), this.getMemberRetained()]).then(() => {
+                                this.structureQueue([this.getOrderDistribution(), this.getConversionAnalysis()]);
                             });
+
                             break;
                         case 2:
-                            this.getConversionAnalysis().then(() => {
-                                if (res) {
-                                    uni.hideLoading();
-                                    this.structureQueue([this.getOrderDistribution(), this.getCustomerDistribution()]);
-                                }
+                            this.AsynchronousCall([this.getConversionAnalysis()]).then(() => {
+                                this.structureQueue([this.getOrderDistribution(), this.getCustomerDistribution()]);
                             });
+
                             break;
                         case 3:
-                            this.structureQueue([
+                            this.AsynchronousCall([
                                 this.getOrderDistribution(),
                                 this.getCustomerDistribution(),
                                 this.getConversionAnalysis()
-                            ]).then(() => {
-                                uni.hideLoading();
-                            });
+                            ]);
                             break;
                     }
                 }
@@ -597,12 +592,7 @@ export default {
             });
         }
     },
-    watch: {
-        currentTime: (newValue, oldValue) => {
-            if (newValue !== oldValue) {
-            }
-        }
-    },
+    watch: {},
     // 下拉刷新
     onPullDownRefresh() {}
 };
