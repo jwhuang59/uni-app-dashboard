@@ -24,7 +24,7 @@
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
-                margin-right: 15rpx;
+                margin-right: 10rpx;
                 // padding: 10rpx;
 
                 text {
@@ -37,12 +37,12 @@
                 }
             }
             .time_wrapper {
-                width: 670rpx;
+                width: 680rpx;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
-                padding: 30rpx 0 30rpx 10rpx;
+                padding: 30rpx 0 30rpx 0rpx;
                 .model{font-size:28rpx;}
             }
             .radio_flex,

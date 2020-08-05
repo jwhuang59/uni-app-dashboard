@@ -74,7 +74,7 @@ export default {
                 _self.getSetTimeout();
             }, 3600 * 1000);
         },
-        // 获取当前开始时间，开始时间，结束时间
+        // 获取当前时间，开始时间，结束时间
         getCurrentTime() {
             const getDate = dayjs().format('YYYY-MM-DD 00:00');
             const timePoint = dayjs().format('HH:mm');
@@ -169,11 +169,7 @@ export default {
             });
             const val = e.detail.value;
             this.activityId = this.activityMenu[val].activityId;
-            this.getActivityAnalysis().then(res => {
-                if (res) {
-                    uni.hideLoading();
-                }
-            });
+            this.getActivityAnalysis();
         },
         // 重置页面数据
         refreshData() {
@@ -273,7 +269,11 @@ export default {
         },
         // 运营报告活动分析
         getActivityAnalysis() {
-            this.structureQueue([this.getActivityGraph(), this.getActivityInfo(), this.getActivityRanking()]);
+            this.AsynchronousCall([this.getActivityGraph(), this.getActivityInfo(), this.getActivityRanking()]).then(
+                () => {
+                    uni.hideLoading();
+                }
+            );
         },
         // 活动列表
         getActivityList() {
