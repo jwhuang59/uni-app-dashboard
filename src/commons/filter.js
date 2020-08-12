@@ -21,6 +21,19 @@ const filters = {
         s = s < 10 ? '0' + s : s;
 
         return m + '/' + d + '/' + y + ' ' + h + ':' + min;
+    },
+    // 金额格式化
+    moneyFormatFilter(num) {
+        if (!num) return '';
+        if (num.toString().indexOf('.') === -1) {
+            return (num || '').toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+        } else {
+            const moneyArr = num.toString().split('.');
+            const integer = (moneyArr[0] || 0).toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
+            const decimal = moneyArr[1].substring(0, 2);
+
+            return integer + '.' + decimal;
+        }
     }
 };
 

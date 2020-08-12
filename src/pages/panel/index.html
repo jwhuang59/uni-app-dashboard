@@ -6,8 +6,11 @@
                     <view class="select_time">
                         <view class="select_pattern">
                             <radio-group @change="radioChange" class="radio_group">
-                                <label class="uni-list-cell uni-list-cell-pd radio_flex"
-                                    v-for="(item, index) in pattern" :key="item.id">
+                                <label
+                                    class="uni-list-cell uni-list-cell-pd radio_flex"
+                                    v-for="(item, index) in pattern"
+                                    :key="item.id"
+                                >
                                     <view>
                                         <radio :value="item.id" :checked="item.id == timeType" />
                                     </view>
@@ -17,27 +20,43 @@
                         </view>
                         <!-- <text class="iconfont icongengduo"></text> -->
                     </view>
-                    <view class="current_time">
-                        <view v-if="timeType == 2" @click="selectDatePattern(1)" class="current_time_text">
-                            {{currentTime}}
-                        </view>
-                        <view class="uni-list-cell-db" v-else>
-                            <picker @change="timeSlotChange" @columnchange="columnchange" :value="index"
-                                :range="[lastMonth,startTimePoint,endTimePoint]" mode="multiSelector">
-                                <view class="current_time_text">{{currentTime}}</view>
-                            </picker>
-                        </view>
-                    </view>
                 </view>
                 <view class="refresh" @click="refreshData">
-                    <!-- <image src="../../static/images/icon/refresh.png"></image> -->
-                    <text>重置</text>
+                    <image src="../../static/images/icon/refresh.png"></image>
+                    <text>回到当前</text>
                 </view>
             </view>
-
+            <view class="tab_time_wrapper">
+                <view class="current_time">
+                    <view v-if="timeType == 2" @click="selectDatePattern(1)" class="current_time_text">
+                        <text>{{currentDate}}</text>
+                        <image src="../../static/images/icon/drop-down.png" :class="showCalendar ? 'show_up' : ''">
+                        </image>
+                    </view>
+                    <view class="uni-list-cell-db" v-else>
+                        <picker
+                            @change="timeSlotChange"
+                            @columnchange="columnchange"
+                            :value="index"
+                            :range="[lastMonth,startTimePoint,endTimePoint]"
+                            mode="multiSelector"
+                            @click="selectTimeSlot"
+                            @cancel="cancelTimeSlot"
+                        >
+                            <view class="current_time_text">
+                                <text>{{currentTime}}</text>
+                                <image
+                                    src="../../static/images/icon/drop-down.png"
+                                    :class="showTimeSlot ? 'show_up' : ''"
+                                ></image>
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+            </view>
             <view class="sales_volume">
                 <view class="sales_num">
-                    {{salesCountInfo.totalSales || ''}}
+                    {{salesCountInfo.totalSales | moneyFormatFilter}}
                 </view>
                 <view class="sales_text">
                     <image src="../../static/images/mony_number.png"></image>
@@ -47,15 +66,16 @@
             <view class="other_volume">
                 <view class="sales_text">
                     <view class="lastweek">
-                        <text
-                            :class="salesCountInfo.type == -1 ? 'down' : ''">{{salesCountInfo.comparedLastWeek}}</text>
+                        <text :class="salesCountInfo.type == -1 ? 'down' : ''"
+                            >{{salesCountInfo.comparedLastWeek}}</text
+                        >
                         <image src="../../static/images/icon/green_down.png" v-if="salesCountInfo.type == -1"></image>
                         <image src="../../static/images/icon/red_up.png" v-if="salesCountInfo.type == 1"></image>
                     </view>
                     <label>同比上周</label>
                 </view>
                 <view class="sales_text">
-                    <text>{{salesCountInfo.businessShop}}</text>
+                    <text>{{salesCountInfo.businessShop | moneyFormatFilter}}</text>
                     <label>在营门店</label>
                 </view>
             </view>
@@ -63,8 +83,14 @@
         <view class="report_area">
             <view class="report_title">锅圈运营报告</view>
             <view class="report_menu">
-                <view :class="[index == current ? 'active' : '','report_lis']" v-for="(item,index) in reportText"
-                    :key="index" @click="switchTab" :data-id="index">{{item}}</view>
+                <view
+                    :class="[index == current ? 'active' : '','report_lis']"
+                    v-for="(item,index) in reportText"
+                    :key="index"
+                    @click="switchTab"
+                    :data-id="index"
+                    >{{item}}</view
+                >
             </view>
         </view>
         <view class="body_container">
@@ -75,40 +101,50 @@
                             <image webp :src="getImg('order_bg1')"></image>
                             <label>总订单数</label>
                             <view class="contrast_yes">
-                                <text>{{orderInfo.totalOrderQuantity}}</text>
+                                <text>{{orderInfo.totalOrderQuantity | moneyFormatFilter}}</text>
                             </view>
                         </view>
                         <view class="order_count">
                             <image webp :src="getImg('order_bg2')"></image>
-                            <label>对比昨日</label>
+                            <label>对比上周</label>
                             <view class="contrast_yes">
                                 <text>{{orderInfo.comparedLastWeek}}</text>
-                                <image src="../../static/images/icon/white_down.png" class="white_arrow"
-                                    v-if="orderInfo.type == -1"></image>
-                                <image src="../../static/images/icon/white_up.png" class="white_arrow"
-                                    v-if="orderInfo.type == 1"></image>
+                                <image
+                                    src="../../static/images/icon/white_down.png"
+                                    class="white_arrow"
+                                    v-if="orderInfo.type == -1"
+                                ></image>
+                                <image
+                                    src="../../static/images/icon/white_up.png"
+                                    class="white_arrow"
+                                    v-if="orderInfo.type == 1"
+                                ></image>
                             </view>
                         </view>
                         <view class="order_count">
                             <image webp :src="getImg('order_bg3')"></image>
                             <label>店均订单数</label>
                             <view class="contrast_yes">
-                                <text>{{orderInfo.shopAvgOrderQuantity}}</text>
+                                <text>{{orderInfo.shopAvgOrderQuantity | moneyFormatFilter}}</text>
                             </view>
                         </view>
                         <view class="order_count">
                             <image webp :src="getImg('order_bg4')"></image>
                             <label>店均销售额</label>
                             <view class="contrast_yes">
-                                <text>{{orderInfo.shopAvgTurnover}}</text>
+                                <text>{{orderInfo.shopAvgTurnover | moneyFormatFilter}}</text>
                             </view>
                         </view>
                     </view>
                     <view class="order_chart">
                         <view class="showBarChart" :style="'height:' + cHeight + 'px' ">
-                            <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showBarChart"
-                                id="showBarChart" @touchstart="touchColumn"
-                                :style="'height:' + cHeight + 'px' "></canvas>
+                            <canvas
+                                :class="showCalendar ? 'hide_calendar' : ''"
+                                canvas-id="showBarChart"
+                                id="showBarChart"
+                                @touchstart="touchColumn"
+                                :style="'height:' + cHeight + 'px' "
+                            ></canvas>
                         </view>
                     </view>
                     <view class="order_table">
@@ -119,17 +155,27 @@
                             <view class="table_bar">
                                 <label>线上订单</label>
                             </view>
-                            <view class="table_bar">
+                            <view class="table_bar radius_bottom_left">
                                 <label>线下订单</label>
                             </view>
-                            <view class="table_bar radius_bottom_left">
+                            <!-- <view class="table_bar radius_bottom_left">
                                 <label>渠道订单</label>
-                            </view>
+                            </view> -->
                         </view>
                         <view class="table_right">
-                            <scroll-view class="" show-scrollbar="true" scroll-x="true" scroll-y="false"
-                                upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0"
-                                scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                            <scroll-view
+                                class=""
+                                show-scrollbar="true"
+                                scroll-x="true"
+                                scroll-y="false"
+                                upper-threshold="50"
+                                lower-threshold="50"
+                                scroll-top="0"
+                                scroll-left="0"
+                                scroll-into-view=""
+                                scroll-with-animation="false"
+                                enable-back-to-top="false"
+                            >
                                 <view class="table_content">
                                     <view class="table_title">
                                         <view>
@@ -146,21 +192,36 @@
                                         </view>
                                         <view>
                                             <label>订单数占比</label>
-                                            <!-- <image></image> -->
+                                        </view>
+                                        <view>
+                                            <label>销售额占比</label>
+                                        </view>
+                                        <view>
+                                            <label>周同比</label>
+                                        </view>
+                                        <view>
+                                            <label>月同比</label>
                                         </view>
                                         <view class="radius_top_right">
-                                            <label>销售额占比</label>
-                                            <!-- <image></image> -->
+                                            <label>比昨日</label>
                                         </view>
                                     </view>
-                                    <view v-for="(item, index) in orderAnalysis" :key="index"
-                                        :class="[index == 1 ? 'color' : '' , 'table_val']">
-                                        <view><text>{{item.totalOrder}}</text></view>
-                                        <view><text>{{item.totalSales}}</text></view>
-                                        <view><text>{{item.perCustomerTransaction}}</text></view>
+                                    <view
+                                        v-for="(item, index) in orderAnalysis"
+                                        :key="index"
+                                        v-if="index < 2"
+                                        :class="[index == 1 ? 'color' : '' , 'table_val']"
+                                    >
+                                        <view><text>{{item.totalOrder | moneyFormatFilter}}</text></view>
+                                        <view><text>{{item.totalSales | moneyFormatFilter}}</text></view>
+                                        <view><text>{{item.perCustomerTransaction | moneyFormatFilter}}</text></view>
                                         <view><text>{{item.orderProportion}}</text></view>
-                                        <view :class="index == 2 ? 'radius_bottom_right' : '' ">
-                                            <text>{{item.salesProportion}}</text></view>
+                                        <view><text>{{item.salesProportion}}</text></view>
+                                        <view><text>{{item.comparedLastWeek}}</text></view>
+                                        <view><text>{{item.comparedLastMont}}</text></view>
+                                        <view :class="index == 1 ? 'radius_bottom_right' : '' ">
+                                            <text>{{item.comparedYesterday}}</text>
+                                        </view>
                                     </view>
                                 </view>
                             </scroll-view>
@@ -172,12 +233,12 @@
                         <view class="customer_count">
                             <image webp :src="getImg('customer_bg5')"></image>
                             <label>总会员数</label>
-                            <text>{{memberInfo.totalMemberNumber}}</text>
+                            <text>{{memberInfo.totalMemberNumber | moneyFormatFilter}}</text>
                         </view>
                         <view class="customer_count">
                             <image webp :src="getImg('order_bg2')"></image>
                             <label>总客户数</label>
-                            <text>{{memberInfo.totalClientNumber}}</text>
+                            <text>{{memberInfo.totalClientNumber | moneyFormatFilter}}</text>
                         </view>
                     </view>
                     <view class="customer_rate">
@@ -200,8 +261,13 @@
                     </view>
 
                     <view class="showPieChart" :style="'height:' + cHeight + 'px' ">
-                        <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showPieChart" id="showPieChart"
-                            @touchstart="touchPie" :style="'height:' + cHeight + 'px' "></canvas>
+                        <canvas
+                            :class="showCalendar ? 'hide_calendar' : ''"
+                            canvas-id="showPieChart"
+                            id="showPieChart"
+                            @touchstart="touchPie"
+                            :style="'height:' + cHeight + 'px' "
+                        ></canvas>
                     </view>
 
                     <view class="customer_table">
@@ -209,9 +275,9 @@
                             <view class="table_bar radius_top_left">
                                 <label>客户类型</label>
                             </view>
-                            <view class="table_bar">
+                            <!-- <view class="table_bar">
                                 <label>新会员</label>
-                            </view>
+                            </view> -->
                             <view class="table_bar">
                                 <label>新客户</label>
                             </view>
@@ -220,9 +286,19 @@
                             </view>
                         </view>
                         <view class="table_right">
-                            <scroll-view class="" show-scrollbar="true" scroll-x="false" scroll-y="false"
-                                upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0"
-                                scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                            <scroll-view
+                                class=""
+                                show-scrollbar="true"
+                                scroll-x="false"
+                                scroll-y="false"
+                                upper-threshold="50"
+                                lower-threshold="50"
+                                scroll-top="0"
+                                scroll-left="0"
+                                scroll-into-view=""
+                                scroll-with-animation="false"
+                                enable-back-to-top="false"
+                            >
                                 <view class="table_content">
                                     <view class="table_title">
                                         <view>
@@ -240,13 +316,18 @@
                                             <text>(元)</text>
                                         </view>
                                     </view>
-                                    <view v-for="(item, index) in memberInfo.memberOrderAnalysisList" :key="index"
-                                        :class="[index == 1 ? 'color' : '' , 'table_val']">
-                                        <view><text>{{item.memberNumber}}</text></view>
+                                    <view
+                                        v-for="(item, index) in memberInfo.memberOrderAnalysisList"
+                                        :key="index"
+                                        v-if="index > 0"
+                                        :class="[index == 1 ? 'color' : '' , 'table_val']"
+                                    >
+                                        <view><text>{{item.memberNumber | moneyFormatFilter}}</text></view>
                                         <view><text>{{item.orderProportion}}</text></view>
                                         <view><text>{{item.salesProportion}}</text></view>
                                         <view :class="index == 2 ? 'radius_bottom_right' : '' ">
-                                            <text>{{item.perCustomerTransaction}}</text></view>
+                                            <text>{{item.perCustomerTransaction | moneyFormatFilter}}</text></view
+                                        >
                                     </view>
                                 </view>
                             </scroll-view>
@@ -267,18 +348,28 @@
                             <label>同比上周</label>
                             <view class="contrast_yes">
                                 <text>{{conversionInfo.comparedLastWeek}}</text>
-                                <image src="../../static/images/icon/white_down.png" class="white_arrow"
-                                    v-if="conversionInfo.type == -1"></image>
-                                <image src="../../static/images/icon/white_up.png" class="white_arrow"
-                                    v-if="conversionInfo.type == 1"></image>
+                                <image
+                                    src="../../static/images/icon/white_down.png"
+                                    class="white_arrow"
+                                    v-if="conversionInfo.type == -1"
+                                ></image>
+                                <image
+                                    src="../../static/images/icon/white_up.png"
+                                    class="white_arrow"
+                                    v-if="conversionInfo.type == 1"
+                                ></image>
                             </view>
                         </view>
                     </view>
                     <view class="conversion_chart">
                         <view class="showBarChart0" :style="'height:' + cHeight + 'px' ">
-                            <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showBarChart0"
-                                id="showBarChart0" @touchstart="touchColumn0"
-                                :style="'height:' + cHeight + 'px' "></canvas>
+                            <canvas
+                                :class="showCalendar ? 'hide_calendar' : ''"
+                                canvas-id="showBarChart0"
+                                id="showBarChart0"
+                                @touchstart="touchColumn0"
+                                :style="'height:' + cHeight + 'px' "
+                            ></canvas>
                         </view>
                     </view>
 
@@ -301,9 +392,19 @@
                             </view>
                         </view>
                         <view class="table_right">
-                            <scroll-view class="" show-scrollbar="true" scroll-x="true" scroll-y="false"
-                                upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0"
-                                scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                            <scroll-view
+                                class=""
+                                show-scrollbar="true"
+                                scroll-x="true"
+                                scroll-y="false"
+                                upper-threshold="50"
+                                lower-threshold="50"
+                                scroll-top="0"
+                                scroll-left="0"
+                                scroll-into-view=""
+                                scroll-with-animation="false"
+                                enable-back-to-top="false"
+                            >
                                 <view class="table_content">
                                     <view class="table_title">
                                         <view>
@@ -320,13 +421,17 @@
                                             <label>转化率</label>
                                         </view>
                                     </view>
-                                    <view v-for="(item , index) in conversionInfo.conversionAnalysis" :key="index"
-                                        :class="[index == 1 || index == 3 ? 'color' : '' , 'table_val']">
-                                        <view><text>{{item.number}}</text></view>
+                                    <view
+                                        v-for="(item , index) in conversionInfo.conversionAnalysis"
+                                        :key="index"
+                                        :class="[index == 1 || index == 3 ? 'color' : '' , 'table_val']"
+                                    >
+                                        <view><text>{{item.number | moneyFormatFilter}}</text></view>
                                         <view><text>{{item.comparedYesterday}}</text></view>
                                         <view><text>{{item.comparedLastWeek}}</text></view>
                                         <view :class="index == 3 ? 'radius_bottom_right' : '' ">
-                                            <text>{{item.percentConversion}}</text></view>
+                                            <text>{{item.percentConversion}}</text></view
+                                        >
                                     </view>
                                 </view>
                             </scroll-view>
@@ -336,16 +441,25 @@
                 <view :class="[current == 3 ? 'show' : '','activity']">
                     <view class="activity_type">
                         <view class="uni-list-cell-db">
-                            <picker class="" mode="selector" :range="activityList" :value="index"
-                                @change="selectActivity">
+                            <picker
+                                class=""
+                                mode="selector"
+                                :range="activityList"
+                                :value="index"
+                                @change="selectActivity"
+                            >
                                 <view class="drop_down">
                                     <text>选择活动</text>
                                     <image src="../../static/images/icon/drop_down0.png"></image>
                                 </view>
                             </picker>
                         </view>
-                        <view class="activity_name" v-for="(item,index) in activityMenu" :key="index"
-                            v-if="item.activityId === activityId">
+                        <view
+                            class="activity_name"
+                            v-for="(item,index) in activityMenu"
+                            :key="index"
+                            v-if="item.activityId === activityId"
+                        >
                             <image src="../../static/images/broadcast.png"></image>
                             <text>{{item.activityTitle}}</text>
                             <label class="isGoing" v-if="item.activityTitle == '进行中'">{{item.activityStatus}}</label>
@@ -354,37 +468,42 @@
                     </view>
 
                     <view class="showCurveChart" :style="'height:' + cHeight + 'px' ">
-                        <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showCurveChart"
-                            id="showCurveChart" @touchstart="touchArea" :style="'height:' + cHeight + 'px' "></canvas>
+                        <canvas
+                            :class="showCalendar ? 'hide_calendar' : ''"
+                            canvas-id="showCurveChart"
+                            id="showCurveChart"
+                            @touchstart="touchArea"
+                            :style="'height:' + cHeight + 'px' "
+                        ></canvas>
                     </view>
                     <view class="activity_info">
                         <view class="activity_count">
                             <image webp :src="getImg('order_bg1')"></image>
                             <label>累计销售额</label>
-                            <text>{{activitySalesInfo.cumulativeSales}}</text>
+                            <text>{{activitySalesInfo.cumulativeSales | moneyFormatFilter}}</text>
                         </view>
                         <view class="activity_count">
                             <image webp :src="getImg('order_bg4')"></image>
                             <label>累计活动销售额</label>
-                            <text>{{activitySalesInfo.cumulativeActivitySales}}</text>
+                            <text>{{activitySalesInfo.cumulativeActivitySales | moneyFormatFilter}}</text>
                         </view>
                     </view>
                     <view class="activity_info_other">
                         <view class="activity_count">
                             <label>累计订单数：</label>
-                            <text>{{activitySalesInfo.cumulativeOrderNumber}}</text>
+                            <text>{{activitySalesInfo.cumulativeOrderNumber | moneyFormatFilter}}</text>
                         </view>
                         <view class="activity_count">
                             <label>新增会员数：</label>
-                            <text>{{activitySalesInfo.newMember}}</text>
+                            <text>{{activitySalesInfo.newMember | moneyFormatFilter}}</text>
                         </view>
                         <view class="activity_count">
                             <label>累计访问数：</label>
-                            <text>{{activitySalesInfo.cumulativeAccessNumber}}</text>
+                            <text>{{activitySalesInfo.cumulativeAccessNumber | moneyFormatFilter}}</text>
                         </view>
                         <view class="activity_count">
                             <label>新增客户数：</label>
-                            <text>{{activitySalesInfo.newCustomer}}</text>
+                            <text>{{activitySalesInfo.newCustomer | moneyFormatFilter}}</text>
                         </view>
                     </view>
                     <view class="activity_ranking">
@@ -402,8 +521,9 @@
                     <view class="activity_contrast">
                         <view class="contrast_header">
                             <view class="contrast_title">定向对比</view>
-                            <view class="contrast_date_time" v-if="contrastDate.length != 0">{{contrastDate[0]}} 和
-                                {{contrastDate[1]}}</view>
+                            <view class="contrast_date_time" v-if="contrastDate.length != 0"
+                                >{{contrastDate[0]}} 和 {{contrastDate[1]}}</view
+                            >
                             <view class="contrast_date_text" @click="selectDatePattern(2)">选择日期</view>
                         </view>
                         <view class="activity_table" v-if="contrastDate.length != 0">
@@ -425,9 +545,19 @@
                                 </view>
                             </view>
                             <view class="table_right">
-                                <scroll-view class="" show-scrollbar="true" scroll-x="false" scroll-y="false"
-                                    upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0"
-                                    scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                                <scroll-view
+                                    class=""
+                                    show-scrollbar="true"
+                                    scroll-x="false"
+                                    scroll-y="false"
+                                    upper-threshold="50"
+                                    lower-threshold="50"
+                                    scroll-top="0"
+                                    scroll-left="0"
+                                    scroll-into-view=""
+                                    scroll-with-animation="false"
+                                    enable-back-to-top="false"
+                                >
                                     <view class="table_content">
                                         <view class="table_title">
                                             <view>
@@ -440,12 +570,16 @@
                                                 <label>增长率</label>
                                             </view>
                                         </view>
-                                        <view v-for="(item , index) in comparisonSalesInfo" :key="index"
-                                            :class="[index == 1 || index == 3 ? 'color' : '' , 'table_val']">
-                                            <view><text>{{item.preComparisonNumber}}</text></view>
-                                            <view><text>{{item.afterComparisonNumber}}</text></view>
+                                        <view
+                                            v-for="(item , index) in comparisonSalesInfo"
+                                            :key="index"
+                                            :class="[index == 1 || index == 3 ? 'color' : '' , 'table_val']"
+                                        >
+                                            <view><text>{{item.preComparisonNumber | moneyFormatFilter}}</text></view>
+                                            <view><text>{{item.afterComparisonNumber | moneyFormatFilter}}</text></view>
                                             <view :class="index == 3 ? 'radius_bottom_right' : '' ">
-                                                <text>{{item.proportion}}</text></view>
+                                                <text>{{item.proportion}}</text></view
+                                            >
                                         </view>
                                     </view>
                                 </scroll-view>
@@ -455,6 +589,12 @@
                 </view>
             </view>
         </view>
-        <u-calendar v-model="showCalendar" mode="range" @change="changeCalendar"></u-calendar>
+        <u-calendar
+            v-model="showCalendar"
+            mode="range"
+            @change="changeCalendar"
+            :max-date="getMaxDate"
+            @changeFirstDate="changeFirstDate"
+        ></u-calendar>
     </view>
 </view>

@@ -21,13 +21,16 @@ export default {
             lastMonth: [], // 前30天日期数组
             startTimePoint: [], // 开始时间点数组
             endTimePoint: [], // 结束时间点数组
-            currentTime: '', // 当前时间
+            currentTime: '', // 当前时间段
+            currentDate: '', // 当前日期段
             current: 0, // 下标切换运营报告
             reportText: ['订单分布', '客户分布', '转化分析', '活动分析'],
             showCalendar: false, // 日历组件
+            showTimeSlot: false, // 时间段组件
             getStartTime: '', // 开始时间戳
             getEndTime: '', // 结束时间戳
             dateIndex: Number, // 日历下标
+            getMaxDate: '', // 日历可选最大日期
             salesCountInfo: '', // 总销售数据
             orderInfo: '', // 总订单数据
             orderAnalysis: [], // 订单图表
@@ -74,13 +77,17 @@ export default {
                 _self.getSetTimeout();
             }, 3600 * 1000);
         },
-        // 获取当前时间，开始时间，结束时间
+        // 获取当前时间，日期，开始时间，结束时间
         getCurrentTime() {
             const getDate = dayjs().format('YYYY-MM-DD 00:00');
             const timePoint = dayjs().format('HH:mm');
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
 
             this.timeType = 1;
+            this.getMaxDate = dayjs().format('YYYY-MM-DD'); // 日历可选最大日期
             this.currentTime = getDate + '-' + timePoint; // 显示当前时间段
+            this.currentDate = dayjs(yesterday).format('YYYY年MM月DD日') + '-' + dayjs().format('YYYY年MM月DD日'); // 显示当前日期段
             this.getStartTime = dayjs(getDate).valueOf(); // 开始时间戳
             this.getEndTime = dayjs().valueOf(); // 结束时间戳
         },
@@ -88,7 +95,7 @@ export default {
         getDate() {
             const timePoint = [];
             const lastMonth = [];
-            for (let i = 0; i < 24; i++) {
+            for (let i = 0; i < 25; i++) {
                 timePoint.push(i + ':00');
             }
             for (let i = 0; i < 30; i++) {
@@ -120,13 +127,47 @@ export default {
         radioChange(e) {
             this.timeType = e.detail.value;
         },
+        // 控制日期30天范围
+        changeFirstDate(data) {
+            const year = dayjs().year();
+            const month = dayjs().month();
+            const day = dayjs().date();
+            let lastMonth = '';
+            if (month !== 0) {
+                lastMonth = month;
+            } else {
+                lastMonth = 12;
+            }
+
+            const getLastDate = dayjs(year + '-' + lastMonth + '-' + day).valueOf();
+            const getFirstDate = dayjs(data.firstDate).valueOf();
+            const newMaxDate = data.firstYear + '-' + (data.firstMouth + 1) + '-' + data.firstDay;
+            const newcurDate = dayjs().format('YYYY-MM-DD');
+            if (getLastDate > getFirstDate) {
+                this.getMaxDate = newMaxDate;
+            } else {
+                this.getMaxDate = newcurDate;
+            }
+        },
         // 日模式选择日期
         changeCalendar(e) {
             this.getStartTime = dayjs(e.startDate + ' 00:00').valueOf(); // 开始时间戳
             this.getEndTime = dayjs(e.endDate + ' 00:00').valueOf(); // 结束时间戳
 
             if (this.dateIndex === 1) {
-                this.currentTime = e.startDate + '至' + e.endDate;
+                this.currentDate =
+                    e.startYear +
+                    '年' +
+                    e.startMonth +
+                    '月' +
+                    e.startDay +
+                    '日 - ' +
+                    e.endYear +
+                    '年' +
+                    e.endMonth +
+                    '月' +
+                    e.endDay +
+                    '日';
                 this.getPromiseAsyn(this.current);
             } else {
                 const activityDateArr = [];
@@ -149,8 +190,10 @@ export default {
                 this.endTimePoint = newEndTimePoint;
             }
         },
+
         // 时模式选择时间段
         timeSlotChange: function (e) {
+            this.showTimeSlot = false;
             const val = e.detail.value;
             const lastMonth = this.lastMonth[val[0]];
             const startTimePoint = this.startTimePoint[val[1]];
@@ -161,6 +204,12 @@ export default {
             this.getEndTime = dayjs((lastMonth + ' ' + endTimePoint).toString()).valueOf(); // 结束时间戳
 
             this.getPromiseAsyn(this.current);
+        },
+        selectTimeSlot() {
+            this.showTimeSlot = true;
+        },
+        cancelTimeSlot() {
+            this.showTimeSlot = false;
         },
         // 选择活动
         selectActivity(e) {
@@ -188,6 +237,7 @@ export default {
                     type: this.timeType
                 }).then(res => {
                     this.salesCountInfo = res.data;
+
                     resolve(true);
                 });
             });
@@ -205,6 +255,7 @@ export default {
                     type: this.timeType
                 }).then(res => {
                     this.orderInfo = res.data;
+                    res.data.orderChartModel.categories.pop();
                     _self.showBarChart('showBarChart', res.data.orderChartModel);
                     resolve();
                 });
