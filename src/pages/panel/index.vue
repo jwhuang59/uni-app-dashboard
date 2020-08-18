@@ -2,6 +2,7 @@
 <style lang="scss" src="./index.scss" scoped></style>
 <script>
 import UCharts from '../../libs/u-charts';
+import comWaterMarker from '@/components/com-watermarker';
 import dayjs from 'dayjs';
 let _self;
 let canvaColumn = null;
@@ -9,6 +10,9 @@ let canvaColumn0 = null;
 let canvaArea = null;
 let canvaPie = null;
 export default {
+    components: {
+        comWaterMarker
+    },
     data() {
         return {
             cWidth: uni.upx2px(750), // 屏幕宽度
@@ -47,12 +51,15 @@ export default {
             comparisonSalesInfo: '', // 定向对比数据
             contrastDate: [], // 活动对比日期
             beforeDate: '', // 比较日期时间戳
-            afterDate: '' // 被比较日期时间戳
+            afterDate: '', // 被比较日期时间戳
+            flexHeight: '', // 水印高度
+            waterMarkerText: '' // 水印内容
         };
     },
     created() {
         this.getCurrentTime();
         this.getDate();
+        this.waterMarkerText = '锅圈数坊';
     },
     onLoad() {
         _self = this;
@@ -69,6 +76,14 @@ export default {
             _self.getSetTimeout();
         }, surplusMinutes);
     },
+    mounted() {
+        const flexInfo = uni.createSelectorQuery().select('.flex');
+        flexInfo
+            .boundingClientRect(data => {
+                _self.flexHeight = data.height;
+            })
+            .exec();
+    },
     methods: {
         // 整点刷新
         getSetTimeout() {
@@ -77,13 +92,15 @@ export default {
                 _self.getSetTimeout();
             }, 3600 * 1000);
         },
+        getFunc(val) {
+            console.log(val);
+        },
         // 获取当前时间，日期，开始时间，结束时间
         getCurrentTime() {
             const getDate = dayjs().format('YYYY-MM-DD 00:00');
             const timePoint = dayjs().format('HH:mm');
             const yesterday = new Date();
             yesterday.setDate(yesterday.getDate() - 1);
-
             this.timeType = 1;
             this.getMaxDate = dayjs().format('YYYY-MM-DD'); // 日历可选最大日期
             this.currentTime = getDate + '-' + timePoint; // 显示当前时间段
@@ -117,6 +134,7 @@ export default {
         },
         // 切换运营报告
         switchTab(e) {
+            this.getTest = ['1', '2'];
             const newCurrent = e.currentTarget.dataset.id;
             this.current = newCurrent;
             // if (this.current !== newCurrent) {
@@ -222,6 +240,7 @@ export default {
         },
         // 重置页面数据
         refreshData() {
+            // this.jump('saleMore', this.orderAnalysis);
             this.getCurrentTime();
             this.getPromiseAsyn(this.current);
         },

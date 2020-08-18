@@ -1,0 +1,54 @@
+<view class="content">
+
+    <view class="customer_rate">
+        <view class="customer_rate_lis">
+            <label>周留存率</label>
+            <text>23%</text>
+            <image src="../../static/images/icon/refresh.png" @touchstart="getNotes"></image>
+            <view class="notes">这是一条注释这是一条注释这是一条注释</view>
+        </view>
+        <view class="customer_rate_lis">
+            <label>月留存率</label>
+            <text>23%</text>
+            <!-- <image src="../../static/images/icon/refresh.png" @touchstart="getNotes"></image>
+            <view class="notes">这是一条注释这是一条注释这是一条注释</view> -->
+        </view>
+        <view class="customer_rate_lis">
+            <label>周复购率</label>
+            <text>23%</text>
+        </view>
+        <view class="customer_rate_lis">
+            <label>月复购率</label>
+            <text>23%</text>
+        </view>
+    </view>
+    <view class="channel_wrapper">
+        <view class="showPieChart">
+            <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showPieChart" id="showPieChart"
+                @touchstart="touchPie" @touchmove="movePie"></canvas>
+        </view>
+        <view class="channel_menu">
+            <view class="channel_item" v-for="(item,index) in pieSeries" :key="index">
+                <label :style="'background:'+item.color"></label>
+                <text>{{item.name}}</text>
+                <text>{{item.data}}</text>
+                <!-- <text>{{item.data}}</text> -->
+            </view>
+        </view>
+    </view>
+    <view class="consume_wrapper">
+        <view class="showRingChart">
+            <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showRingChart" id="showRingChart"
+                @touchstart="touchRing" @touchmove="moveRing"></canvas>
+        </view>
+        <view class="consume_menu">
+            <view class="consume_item" v-for="(item,index) in ringSeries" :key="index">
+                <label :style="'background:'+item.color"></label>
+                <text>{{item.name}}</text>
+                <text>{{item.data}}</text>
+                <!-- <text>{{item.data}}</text> -->
+            </view>
+        </view>
+    </view>
+    <com-tabbar current="3"></com-tabbar>
+</view>

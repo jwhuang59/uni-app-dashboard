@@ -1,0 +1,16 @@
+<div class="tabbar_wrap">
+    <view class="tabbar_wrap_item" v-for="(item, index) in tabList" :key="index">
+        <view class="navigator" :class="currentTabIndex == index ? 'on' : ''" @tap="switchTab(index,item.tabName)">
+            <block v-if="index != 2">
+                <view class="icon">
+                    <img class="tabIcon" :src="[ currentTabIndex == index ? item.selectSrc :  item.src ]" alt="" />
+                </view>
+                <view class="text" :style="[currentTabIndex == index ? { color: tintColor } : { color: color }]">{{ item.text }}</view>
+            </block>
+            <view class="active" v-else>
+                <text>{{ item.text }}</text>
+            </view>
+        </view>
+
+    </view>
+</div>

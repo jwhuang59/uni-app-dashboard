@@ -5,11 +5,16 @@ export default {
     data() {
         return {};
     },
-
-    onLoad() {
-        setTimeout(() => {
-            this.redirect('panel');
-        }, 3000);
+    onShow() {
+        this.jumpTab('liveData');
+        // const hasUserInfo = this.$store.state.userInfo;
+        // if (hasUserInfo) {
+        //     setTimeout(() => {
+        //         this.reLaunch('liveData');
+        //     }, 1500);
+        // } else {
+        //     this.jump('authorize');
+        // }
     }
 };
 </script>

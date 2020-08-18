@@ -1,0 +1,10 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .mixCharts canvas {
+        width: 690rpx;
+        height: 450rpx;
+    }
+}

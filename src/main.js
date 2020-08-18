@@ -6,10 +6,13 @@ import router from './router';
 import store from './store';
 import commons from './commons';
 import uView from 'uview-ui';
+import comTarBar from './components/com-tabbar/index.vue';
+import comWaterMarker from './components/com-watermarker';
 
 Vue.use(Request);
 Vue.use(uView);
-
+Vue.component('com-tabbar', comTarBar);
+Vue.component('com-watermarker', comWaterMarker);
 Vue.prototype.$store = store;
 Vue.config.productionTip = false;
 

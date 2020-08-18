@@ -38,6 +38,15 @@ export default {
         },
 
         /**
+         * 关闭所有跳转
+         * @param {路径名称} name
+         */
+        reLaunch(name) {
+            const route = { name };
+            this.$Router.replaceAll(route);
+        },
+
+        /**
          * Tab级跳转
          * @param {路径名称} name
          */

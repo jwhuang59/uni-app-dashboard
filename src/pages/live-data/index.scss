@@ -1,0 +1,54 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .header {
+        width: 100%;
+
+        .time_slot {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30rpx 0;
+        }
+        .refresh {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            margin-right: 20rpx;
+            padding: 10rpx;
+
+            text {
+                font-size: 28rpx;
+                color: #1b1b1b;
+            }
+            image {
+                width: 32rpx;
+                height: 30rpx;
+            }
+        }
+        .time_wrapper {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 20rpx;
+            .select_time {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+            }
+            image {
+                width: 32rpx;
+                height: 30rpx;
+            }
+            text {
+                font-size: 24rpx;
+            }
+        }
+    }
+}

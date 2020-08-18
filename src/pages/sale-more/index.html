@@ -1,0 +1,84 @@
+<view class="content">
+    <view class="order_info">
+        <view class="order_table">
+            <view class="table_left">
+                <view class="table_bar radius_top_left">
+                    <label>订单类型</label>
+                </view>
+                <view class="table_bar">
+                    <label>线上订单</label>
+                </view>
+                <view class="table_bar radius_bottom_left">
+                    <label>线下订单</label>
+                </view>
+                <!-- <view class="table_bar radius_bottom_left">
+                    <label>渠道订单</label>
+                </view> -->
+            </view>
+            <view class="table_right">
+                <scroll-view
+                    class=""
+                    show-scrollbar="true"
+                    scroll-x="true"
+                    scroll-y="false"
+                    upper-threshold="50"
+                    lower-threshold="50"
+                    scroll-top="0"
+                    scroll-left="0"
+                    scroll-into-view=""
+                    scroll-with-animation="false"
+                    enable-back-to-top="false"
+                >
+                    <view class="table_content">
+                        <view class="table_title">
+                            <view>
+                                <label>订单数量</label>
+                                <text>(个)</text>
+                            </view>
+                            <view>
+                                <label>销售总额</label>
+                                <text>(元)</text>
+                            </view>
+                            <view>
+                                <label>客单价</label>
+                                <text>(元)</text>
+                            </view>
+                            <view>
+                                <label>订单数占比</label>
+                            </view>
+                            <view>
+                                <label>销售额占比</label>
+                            </view>
+                            <view>
+                                <label>周同比</label>
+                            </view>
+                            <view>
+                                <label>月同比</label>
+                            </view>
+                            <view class="radius_top_right">
+                                <label>比昨日</label>
+                            </view>
+                        </view>
+                        <view
+                            v-for="(item, index) in orderAnalysis"
+                            :key="index"
+                            v-if="index < 2"
+                            :class="[index == 1 ? 'color' : '' , 'table_val']"
+                        >
+                            <view><text>{{item.totalOrder | moneyFormatFilter}}</text></view>
+                            <view><text>{{item.totalSales | moneyFormatFilter}}</text></view>
+                            <view><text>{{item.perCustomerTransaction | moneyFormatFilter}}</text></view>
+                            <view><text>{{item.orderProportion}}</text></view>
+                            <view><text>{{item.salesProportion}}</text></view>
+                            <view><text>{{item.comparedLastWeek}}</text></view>
+                            <view><text>{{item.comparedLastMont}}</text></view>
+                            <view :class="index == 1 ? 'radius_bottom_right' : '' ">
+                                <text>{{item.comparedYesterday}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+</view>

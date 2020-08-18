@@ -1,0 +1,12 @@
+<view class="content">
+    <view class="wm" :style="{height:flexHeight ? flexHeight + 'px' : '100%'}">
+        <div
+            class="wm_text"
+            :style="{'width':100/parseInt(col)+'%','height':100/parseInt(row)+'%'}"
+            v-for="(item,index) in row*col"
+            :key="index"
+        >
+            <div class="text" :style="{'opacity':opacity,'color':color,'transform':'rotate('+rotate+')'}">{{text}}</div>
+        </div>
+    </view>
+</view>

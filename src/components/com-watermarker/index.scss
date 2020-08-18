@@ -1,0 +1,29 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .wm {
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-around;
+        .wm_text {
+            width: 33.33%;
+            height: 14.28%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            opacity: 1;
+        }
+    }
+}

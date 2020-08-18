@@ -1,5 +1,5 @@
 <view class="content">
-    <view class="flex">
+    <view class="flex" ref="flexHeight">
         <view class="header">
             <view class="time_slot">
                 <view class="time_wrapper">
@@ -597,4 +597,14 @@
             @changeFirstDate="changeFirstDate"
         ></u-calendar>
     </view>
+    <comWaterMarker
+        col="3"
+        row="6"
+        opacity="0.3"
+        color="black"
+        rotate="-30deg"
+        :text="waterMarkerText"
+        :flexHeight="flexHeight"
+    >
+    </comWaterMarker>
 </view>

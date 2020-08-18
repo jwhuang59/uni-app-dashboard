@@ -1,0 +1,22 @@
+<view class="content">
+    <navigator class="" target="" url="../panel/index" hover-class="navigator-hover" open-type="navigate">
+        去面板
+    </navigator>
+    <view class="header">
+        <view class="time_slot">
+            <view class="time_wrapper">
+                <view class="select_time">
+                    <image src="../../static/images/icon/refresh.png"></image>
+                    <text>{{currentTime}}</text>
+                </view>
+                <text class="">数据已更新</text>
+            </view>
+            <view class="refresh" @click="refreshData">
+                <image src="../../static/images/icon/refresh.png"></image>
+                <text>刷新</text>
+            </view>
+        </view>
+    </view>
+    <com-tabbar current="2"></com-tabbar>
+    <!-- <com-watermarker col="3" row="6" opacity="1" rotate="-30deg" color='#d6d5d5' :text="waterMarkerText" :flexHeight="flexHeight"></com-watermarker> -->
+</view>

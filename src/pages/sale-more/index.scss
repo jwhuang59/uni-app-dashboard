@@ -1,0 +1,125 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    // 订单分析
+
+    .order_info {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2.5vmax;
+    }
+
+    // 订单表格数据
+    .order_table {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        .table_left {
+            width: 12vmax;
+        }
+        .table_left .table_bar {
+            width: 12vmax;
+            height: 6vmax;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            background: #0091ff;
+            border-bottom: 0.1vmax solid #e1e2ea;
+            box-sizing: border-box;
+        }
+
+        .table_bar label {
+            font-size: 1.6vmax;
+            color: #fff;
+        }
+        .table_right {
+            width: 83vmax;
+        }
+        .table_content {
+            width: 96vmax;
+        }
+        .table_content > view {
+            height: 6vmax;
+        }
+        .table_content .table_title {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 1.6vmax;
+        }
+        .table_content .table_val {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 1.6vmax;
+        }
+        .table_content .table_title > view {
+            background: #31a7ff;
+        }
+        .table_content .table_val > view {
+            background: #dfe6fd;
+        }
+        .table_content .table_title > view {
+            width: 12vmax;
+            height: 6vmax;
+            border-left: 0.1vmax solid #e1e2ea;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+        .table_content .table_val > view {
+            width: 12vmax;
+            height: 6vmax;
+            border-left: 0.1vmax solid #e1e2ea;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            color: #0091ff;
+        }
+        .table_content .table_title > view label {
+            font-size: 1.6vmax;
+            color: #fff;
+        }
+        .table_content .table_title > view text {
+            font-size: 1.3vmax;
+            color: #fff;
+        }
+        .table_content .table_val > view text {
+            font-size: 2vmax;
+            font-weight: 600;
+            color: #0091ff;
+        }
+        .table_content .table_val.color > view {
+            background: #fff;
+        }
+    }
+    // 表格圆角
+
+    .radius_top_left {
+        border-top-left-radius: 0.8vmax;
+    }
+    .radius_bottom_left {
+        border-bottom-left-radius: 0.8vmax;
+    }
+    .radius_top_right {
+        border-top-right-radius: 0.8vmax;
+    }
+    .radius_bottom_right {
+        border-bottom-right-radius: 0.8vmax;
+    }
+}

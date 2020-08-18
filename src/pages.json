@@ -10,12 +10,91 @@
             }
         },
         {
+            "path": "pages/authorize/index",
+            "style": {
+                "navigationBarTitleText": "登录"
+            }
+        },
+        {
+            "path": "pages/live-data/index",
+            "style": {
+                "navigationBarTitleText": "实时数据"
+            }
+        },
+        {
             "path": "pages/panel/index",
             "style": {
-                "navigationBarTitleText": "锅圈数坊"
+                "navigationBarTitleText": "面板"
+            }
+        },
+        {
+            "path": "pages/sale/index",
+            "style": {
+                "navigationBarTitleText": "销售"
+            }
+        },
+        {
+            "path": "pages/activity/index",
+            "style": {
+                "navigationBarTitleText": "活动"
+            }
+        },
+        {
+            "path": "pages/customer/index",
+            "style": {
+                "navigationBarTitleText": "客户"
+            }
+        },
+        {
+            "path": "pages/conversion/index",
+            "style": {
+                "navigationBarTitleText": "转化"
+            }
+        },
+        {
+            "path": "pages/sale-more/index",
+            "style": {
+                "navigationBarTitleText": "销售排行",
+                "pageOrientation": "landscape"
+            }
+        },
+        {
+            "path": "pages/no-found/index",
+            "style": {
+                "navigationBarTitleText": "服务器异常"
             }
         }
     ],
+    "tabBar": {
+        "custom": true,
+        "list": [
+            {
+                "pagePath": "pages/sale/index",
+                "text": "销售"
+            },
+            {
+                "pagePath": "pages/activity/index",
+                "text": "活动"
+            },
+            {
+                "pagePath": "pages/live-data/index",
+                "text": "实时数据"
+            },
+            {
+                "pagePath": "pages/customer/index",
+                "text": "客户"
+            },
+            {
+                "pagePath": "pages/conversion/index",
+                "text": "转化"
+            }
+        ],
+        "backgroundColor": "#fff",
+        "selectedColor": "#31cf6e",
+        "color": "#2E3330",
+        "borderStyle": "white",
+        "position": "bottom"
+    },
     "globalStyle": {
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": "uni-app",
