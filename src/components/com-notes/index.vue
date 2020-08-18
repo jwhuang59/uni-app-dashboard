@@ -3,14 +3,16 @@
 <script>
 export default {
     data(){
-        return{
-            isNotes:false
-        }
+        return{}
     },
     props: {
         notesText: {
             type: String,
             default: '这是一条注释'
+        },
+        width: {
+            type: String,
+            default: '' 
         },
         left: {
             type: String,

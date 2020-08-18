@@ -12,7 +12,11 @@ export default {
             cHeight: uni.upx2px(450), // canvas高度
             pieSeries: '', // 注册渠道数据
             ringSeries: '', // 会员消费数据
-            isNotes: false
+            notesText:'',
+            isNotes: false,
+            width:'',
+            top:'',
+            left:'',
         };
     },
     onLoad() {
@@ -21,8 +25,12 @@ export default {
     },
     methods: {
         showNotes(e) {
-            console.log(e.touches[0].pageX, e.touches[0].pageY);
+            this.notesText = e.currentTarget.dataset.text
+            this.width = uni.getSystemInfoSync().screenWidth - e.touches[0].pageX - 30
+            this.left = e.touches[0].pageX + 15
+            this.top = e.touches[0].pageY
             this.isNotes = true;
+
         },
         hideNotes() {
             this.isNotes = false;

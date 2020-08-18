@@ -4,21 +4,17 @@
     align-items: center;
     justify-content: center;
     .notes{
-        width:590rpx;
-        height:100rpx;
-        padding:20rpx;
+        padding:20rpx 30rpx;
+        border:2rpx solid #ddd;
         box-sizing: border-box;
+        border-radius: 10rpx;
         font-size:24rpx;
         position: absolute;
-        right:-600rpx;
-        top:0;
         z-index:999;
         background:#fff;
         display: none;
-        transform: 0.5s;
     }
     .on{
         display: block;
-        transform: 0.5s;
     }
 }
