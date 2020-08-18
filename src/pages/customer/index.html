@@ -4,22 +4,22 @@
         <view class="customer_rate_lis">
             <label>周留存率</label>
             <text>23%</text>
-            <image src="../../static/images/icon/refresh.png" @touchstart="getNotes"></image>
-            <view class="notes">这是一条注释这是一条注释这是一条注释</view>
+            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes" @touchend="hideNotes" data-text="这是一条注释这是一条注释这是一条注释"></image>
         </view>
         <view class="customer_rate_lis">
             <label>月留存率</label>
             <text>23%</text>
-            <!-- <image src="../../static/images/icon/refresh.png" @touchstart="getNotes"></image>
-            <view class="notes">这是一条注释这是一条注释这是一条注释</view> -->
+            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes"></image>
         </view>
         <view class="customer_rate_lis">
             <label>周复购率</label>
             <text>23%</text>
+            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes"></image>
         </view>
         <view class="customer_rate_lis">
             <label>月复购率</label>
             <text>23%</text>
+            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes"></image>
         </view>
     </view>
     <view class="channel_wrapper">
@@ -50,5 +50,6 @@
             </view>
         </view>
     </view>
+    <com-notes text='notesText' left="" top="" :isNotes='isNotes'></com-notes>
     <com-tabbar current="3"></com-tabbar>
 </view>

@@ -7,12 +7,16 @@ import store from './store';
 import commons from './commons';
 import uView from 'uview-ui';
 import comTarBar from './components/com-tabbar/index.vue';
-import comWaterMarker from './components/com-watermarker';
+import comWaterMarker from './components/com-watermarker/index.vue';
+// import comNotes from './components/com-notes/index.vue';
+// import comNotes from './components/com-notes';
 
 Vue.use(Request);
 Vue.use(uView);
 Vue.component('com-tabbar', comTarBar);
 Vue.component('com-watermarker', comWaterMarker);
+// Vue.component('com-notes', comNotes);
+// Vue.component('com-notes', comNotes);
 Vue.prototype.$store = store;
 Vue.config.productionTip = false;
 

@@ -11,7 +11,8 @@ export default {
             cWidth: uni.upx2px(450), // 屏幕宽度
             cHeight: uni.upx2px(450), // canvas高度
             pieSeries: '', // 注册渠道数据
-            ringSeries: '' // 会员消费数据
+            ringSeries: '', // 会员消费数据
+            isNotes: false
         };
     },
     onLoad() {
@@ -19,8 +20,12 @@ export default {
         this.getServerData();
     },
     methods: {
-        getNotes(){
-            
+        showNotes(e) {
+            console.log(e.touches[0].pageX, e.touches[0].pageY);
+            this.isNotes = true;
+        },
+        hideNotes() {
+            this.isNotes = false;
         },
         getServerData() {
             uni.request({
