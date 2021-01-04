@@ -4,11 +4,11 @@
 export default {
     data() {
         return {
-            orderAnalysis: ''
+            allSaleProvinceInfo: ''
         };
     },
-    onLoad(options) {
-        this.orderAnalysis = this.$Route.query;
+    onLoad() {
+        this.allSaleProvinceInfo = this.getRouteParams();
     },
     methods: {}
 };

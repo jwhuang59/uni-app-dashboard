@@ -1,6 +1,24 @@
 <view class="content">
-    <view class="startup_wrapper">
-        <view class="img_top"><image webp :src="getImg('startup_top')"></image></view>
-        <view class="img_bottom"><image webp :src="getImg('startup_bottom')"></image></view>
+    <view class="home_wrapper">
+        <view class="header">
+            <view class="header_welcome">
+                <label>{{userName}}</label>
+                <text>欢迎您</text>
+            </view>
+            <view class="header_time">
+                <label>{{currentTime}}</label>
+                <text>数据已更新</text>
+            </view>
+        </view>
+        <view class="img_top">
+            <image webp :src="getImg('loading')"></image>
+        </view>
+        <view class="img_bottom">
+            <image webp :src="getImg('logo')"></image>
+        </view>
+        <view class="show_time" v-show='isShow' @click="jumpDelay">
+            <label>跳过</label>
+            <text>{{countdown}}s</text>
+        </view>
     </view>
 </view>

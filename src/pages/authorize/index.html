@@ -1,5 +1,16 @@
 <view class="content">
+    <view class="img_logo">
+        <image webp :src="getImg('loading')" class="img_loading"></image>
+        <image webp :src="getImg('logo')" class="logo"></image>
+    </view>
+
+    <view class="authorize_tips">
+        <view class="empty" @click="checkFunc">
+            <view class="real" v-show='checked'></view>
+        </view>
+        <text>同意保护数据安全协议</text>
+    </view>
     <button class="authorize_btn" open-type="getUserInfo" @getuserinfo="bindUserInfo">
-        授权登录
+        授权
     </button>
 </view>

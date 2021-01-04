@@ -1,3 +1,88 @@
 <view class="content">
+    <view class="header">
+        <view class="time_wrapper">
+            <view class="date_wrapper">
+                <view class="select_time">
+                    <label>选择日期</label>
+                    <view class="date_val">
+                        <text @click="selectCalendar(1)">{{currentDate}}</text>
+                        <image src="../../static/images/icon/drop_down2.png"></image>
+                    </view>
+                </view>
+            </view>
+            <view class="date_wrapper">
+                <view class="select_time">
+                    <label>对比日期</label>
+                    <view class="date_val">
+                        <text @click="selectCalendar(2)">{{currentDateContrast}}</text>
+                        <image src="../../static/images/icon/drop_down2.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="other_volume">
+            <view class="sales_text">
+                <text>{{conversionAnalysisInfo.prePercentConversion}}</text>
+                <label>选择日期转化率</label>
+            </view>
+            <view class="sales_text">
+                <text>{{conversionAnalysisInfo.rearPercentConversion}}</text>
+                <label>对比日期转化率</label>
+            </view>
+            <view class="sales_text">
+                <view class="lastweek">
+                    <text :class="conversionAnalysisInfo.type == -1 ? 'down' : 'up'">{{conversionAnalysisInfo.sequential}}</text>
+                    <image src="../../static/images/icon/green_down.png" v-if="conversionAnalysisInfo.type == -1">
+                    </image>
+                    <image src="../../static/images/icon/red_up.png" v-if="conversionAnalysisInfo.type == 1"></image>
+                </view>
+                <label>环比</label>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="funnel_wrapper">
+            <image src="../../static/images/icon/funnel.png"></image>
+            <text>流量漏斗图</text>
+        </view>
+        <view class="contrast_wrapper">
+            <view class="contrast_menu">
+                <view class="contrast_item">
+                    <label class="time_text">对比时间</label>
+                    <view class="contrast_val">
+                        <view class="contrast_num">
+                            <text class="time">{{flowDate}}</text>
+                        </view>
+                        <view class="contrast_num">
+                            <text class="time">{{flowDateContrast}}</text>
+                        </view>
+                    </view>
+                </view>
+                <view :class="[index == 0 || index == 2 ? 'bg_color' : '','contrast_item']" v-for="(item,index) in conversionAnalysisInfo.conversionContrastVo" :key="index">
+                    <label class="item_text">{{item.title}}</label>
+                    <view class="contrast_val" v-if="index < 3">
+                        <view :class="[index == 0 || index == 1 ? 'triangle' : 'triangle triangle0','contrast_num']">
+                            <text class="num">{{item.selectData | moneyFormatFilter}}</text>
+                            <text class="per">{{item.selectDataProportion}}</text>
+                        </view>
+                        <view :class="[index == 0 || index == 1 ? 'triangle' : 'triangle triangle0','contrast_num']">
+                            <text class="num">{{item.contrastData | moneyFormatFilter}}</text>
+                            <text class="per">{{item.contrastDataProportion}}</text>
+                        </view>
+                    </view>
+                    <view class="contrast_val" v-else>
+                        <view class="contrast_num">
+                            <text class="cus_num">{{item.selectData | moneyFormatFilter}}</text>
+                        </view>
+                        <view class="contrast_num">
+                            <text class="cus_num">{{item.contrastData | moneyFormatFilter}}</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <u-calendar v-model="showCalendar" mode="range" @change="changeCalendar" :max-date="getMaxDate" @changeFirstDate="changeFirstDate"></u-calendar>
     <com-tabbar current="4"></com-tabbar>
+    <com-watermarker col="2" row="4" opacity="1" rotate="-30deg" color='#d6d5d5' :text="waterMarkerText" :flexHeight="flexHeight" :status="isWaterMarker"></com-watermarker>
 </view>

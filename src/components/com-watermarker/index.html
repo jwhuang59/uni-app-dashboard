@@ -1,5 +1,5 @@
-<view class="content">
-    <view class="wm" :style="{height:flexHeight ? flexHeight + 'px' : '100%'}">
+<view class="content" v-if="status">
+    <view class="wm" :style="{height:flexHeight ? (flexHeight-80) + 'px' : '100%'}">
         <div
             class="wm_text"
             :style="{'width':100/parseInt(col)+'%','height':100/parseInt(row)+'%'}"

@@ -24,7 +24,7 @@ const filters = {
     },
     // 金额格式化
     moneyFormatFilter(num) {
-        if (!num) return '';
+        if (!num) return '0';
         if (num.toString().indexOf('.') === -1) {
             return (num || '').toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,');
         } else {

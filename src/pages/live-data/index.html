@@ -1,22 +1,139 @@
 <view class="content">
-    <navigator class="" target="" url="../panel/index" hover-class="navigator-hover" open-type="navigate">
-        去面板
-    </navigator>
     <view class="header">
-        <view class="time_slot">
-            <view class="time_wrapper">
+        <view class="time_wrapper">
+            <view class="date_wrapper">
                 <view class="select_time">
-                    <image src="../../static/images/icon/refresh.png"></image>
+                    <image src="../../static/images/icon/time.png"></image>
                     <text>{{currentTime}}</text>
                 </view>
-                <text class="">数据已更新</text>
+                <text class="text">数据已更新</text>
             </view>
-            <view class="refresh" @click="refreshData">
+            <view class="refresh" @click="refresh">
                 <image src="../../static/images/icon/refresh.png"></image>
                 <text>刷新</text>
             </view>
         </view>
+        <view class="sales_volume">
+            <view class="sales_text">
+                <image webp :src="getImg('mony_number')"></image>
+                <text>总销售额</text>
+            </view>
+            <view class="sales_num">
+                {{saleInfo.totalSales | moneyFormatFilter}}
+            </view>
+        </view>
+        <view class="other_volume">
+            <view class="sales_text">
+                <view class="lastweek">
+                    <text :class="saleInfo.type == -1 ? 'down' : 'up'">{{saleInfo.comparedLastWeek}}</text>
+                    <image src="../../static/images/icon/green_down.png" v-if="saleInfo.type == -1"></image>
+                    <image src="../../static/images/icon/red_up.png" v-if="saleInfo.type == 1"></image>
+                </view>
+                <label>同比上周</label>
+            </view>
+            <view class="sales_text">
+                <text>{{saleInfo.businessShop | moneyFormatFilter}}</text>
+                <label>在营门店</label>
+            </view>
+            <view class="sales_text">
+                <text>{{saleInfo.averageStoreSales | moneyFormatFilter}}</text>
+                <label>店均销售额</label>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="customer_info">
+            <view class="customer_count">
+                <image webp :src="getImg('order_bg1')"></image>
+                <label>全国总注册会员</label>
+                <view class="contrast_yes">
+                    <text>{{customerInfo.memberNumber}}</text>
+                </view>
+            </view>
+            <view class="customer_count">
+                <image webp :src="getImg('order_bg5')"></image>
+                <label>全国总下单客户</label>
+                <view class="contrast_yes">
+                    <text>{{customerInfo.customerNumber}}</text>
+
+                </view>
+            </view>
+            <!-- <view class="customer_count">
+                <image webp :src="getImg('order_bg3')"></image>
+                <label>全国总储值客户数</label>
+                <view class="contrast_yes">
+                    <text>{{customerInfo.storedCustomerNumber}}</text>
+                </view>
+            </view>
+            <view class="customer_count">
+                <image webp :src="getImg('order_bg4')"></image>
+                <label>全国总储值金额</label>
+                <view class="contrast_yes">
+                    <text>{{customerInfo.averageStoreSales}}</text>
+                </view>
+            </view> -->
+        </view>
+        <view class="sale_ranking">
+            <view class="sale_ranking_bg">
+                <image webp :src="getImg('sale_img')"></image>
+            </view>
+            <view class="sale_header">
+                <image src="../../static/images/icon/sale_ranking.png"></image>
+                <text>今日销售排行</text>
+            </view>
+            <view class="sale_wrapper">
+                <view class="sale_wrapper_hot">
+                    <view class="wrapper_title">
+                        <view class="triangle_hot"></view>
+                        <text>热榜</text>
+                        <label>按销售额排名</label>
+                    </view>
+                    <view class="ranking_menu">
+                        <view class="ranking_item" v-for="(item,index) in saleRankingInfo.hotLeaderboard" :key="index" v-if="index<3">
+                            <view class="item_left">
+                                <view class="item_left_label">
+                                    <image webp :src="getImg('icon_hot'+(index+1))"></image>
+                                    <text>NO.{{index+1}}</text>
+                                </view>
+                                <view class="store_text">
+                                    {{item.shopName}}
+                                </view>
+                            </view>
+                            <view class="item_right">
+                                <image webp :src="getImg('ranking_bg'+(index+1))"></image>
+                                <text>{{item.storeSales | moneyFormatFilter}}</text>
+                            </view>
+                        </view>
+
+                    </view>
+                </view>
+                <view class="sale_wrapper_cold">
+                    <view class="wrapper_title">
+                        <view class="triangle_cold"></view>
+                        <text>冷榜</text>
+                        <label>按销售额排名</label>
+                    </view>
+                    <view class="ranking_menu">
+                        <view class="ranking_item" v-for="(item,index) in saleRankingInfo.coldLeaderboard" :key="index" v-if="index<3">
+                            <view class="item_left">
+                                <view class="item_left_label">
+                                    <image webp :src="getImg('icon_cold'+(index+1))"></image>
+                                    <text>NO.{{index+1}}</text>
+                                </view>
+                                <view class="store_text">
+                                    {{item.shopName}}
+                                </view>
+                            </view>
+                            <view class="item_right">
+                                <image webp :src="getImg('ranking_bg4')"></image>
+                                <text>{{item.storeSales | moneyFormatFilter}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
     </view>
     <com-tabbar current="2"></com-tabbar>
-    <!-- <com-watermarker col="3" row="6" opacity="1" rotate="-30deg" color='#d6d5d5' :text="waterMarkerText" :flexHeight="flexHeight"></com-watermarker> -->
+    <com-watermarker col="2" row="5" opacity="1" rotate="-30deg" color='#d6d5d5' :text="waterMarkerText" :flexHeight="flexHeight" :status="isWaterMarker"></com-watermarker>
 </view>

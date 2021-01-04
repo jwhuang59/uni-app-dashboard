@@ -33,17 +33,18 @@
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            background: #0091ff;
-            border-bottom: 0.1vmax solid #e1e2ea;
+            background: #E6F7FF;
             box-sizing: border-box;
-        }
-
-        .table_bar label {
-            font-size: 1.6vmax;
-            color: #fff;
+            label {
+                font-size: 1.8vmax;
+                font-weight:bold;
+                color: #404D57;
+            }
+            
         }
         .table_right {
             width: 83vmax;
+            border-left:0.6vmax solid rgba(0, 0, 0, 0.05);
         }
         .table_content {
             width: 96vmax;
@@ -66,15 +67,15 @@
             font-size: 1.6vmax;
         }
         .table_content .table_title > view {
-            background: #31a7ff;
+            background: #fff;
+            border-bottom: 0.1vmax solid #e1e2ea;
         }
         .table_content .table_val > view {
-            background: #dfe6fd;
+            background: #fff;
         }
         .table_content .table_title > view {
             width: 12vmax;
             height: 6vmax;
-            border-left: 0.1vmax solid #e1e2ea;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -84,25 +85,26 @@
         .table_content .table_val > view {
             width: 12vmax;
             height: 6vmax;
-            border-left: 0.1vmax solid #e1e2ea;
+            border-right: 0.1vmax solid #e1e2ea;
+            border-bottom: 0.1vmax solid #e1e2ea;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             color: #0091ff;
         }
+        .table_content .table_val > view:last-child{
+            border-right:0;
+        }
         .table_content .table_title > view label {
             font-size: 1.6vmax;
-            color: #fff;
-        }
-        .table_content .table_title > view text {
-            font-size: 1.3vmax;
-            color: #fff;
+            font-weight:500;
+            color: #404D57;
         }
         .table_content .table_val > view text {
-            font-size: 2vmax;
-            font-weight: 600;
-            color: #0091ff;
+            font-size: 1.5vmax;
+            font-weight:500;
+            color: #727C83;
         }
         .table_content .table_val.color > view {
             background: #fff;

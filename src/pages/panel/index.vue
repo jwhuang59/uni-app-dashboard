@@ -77,9 +77,10 @@ export default {
         }, surplusMinutes);
     },
     mounted() {
-        const flexInfo = uni.createSelectorQuery().select('.flex');
+        const flexInfo = uni.createSelectorQuery().select('.content');
         flexInfo
             .boundingClientRect(data => {
+                console.log(data);
                 _self.flexHeight = data.height;
             })
             .exec();
@@ -175,17 +176,16 @@ export default {
             if (this.dateIndex === 1) {
                 this.currentDate =
                     e.startYear +
-                    '年' +
+                    '.' +
                     e.startMonth +
-                    '月' +
+                    '.' +
                     e.startDay +
-                    '日 - ' +
+                    ' - ' +
                     e.endYear +
-                    '年' +
+                    '.' +
                     e.endMonth +
-                    '月' +
-                    e.endDay +
-                    '日';
+                    '.' +
+                    e.endDay;
                 this.getPromiseAsyn(this.current);
             } else {
                 const activityDateArr = [];
@@ -393,7 +393,7 @@ export default {
         // 消息队列
         structureQueue(messageArr) {
             const promise = Promise.resolve();
-            return messageArr.reduce((total, item) => {
+            messageArr.reduce((total, item) => {
                 return total.then(res => {
                     return new Promise(resolve => {
                         setTimeout(() => {

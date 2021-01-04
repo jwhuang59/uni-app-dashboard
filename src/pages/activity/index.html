@@ -1,13 +1,121 @@
 <view class="content">
-    <view class="mixCharts">
-        <canvas
-            canvas-id="canvasMix"
-            id="canvasMix"
-            class="charts"
-            disable-scroll="true"
-            @touchstart="touchMix"
-            @touchmove="moveMix"
-        ></canvas>
+    <view class="activity_wrapper">
+        <picker mode="selector" :range="activityTitleList" :value="index" @change="selectActivity">
+            <view class="activity_name">
+                <image class="broadcast" src="../../static/images/icon/broadcast.png"></image>
+                <view class="drop_down">
+                    <text>{{activityMenu[activitySub].activityTitle}}</text>
+                    <image src="../../static/images/icon/drop_down0.png"></image>
+                </view>
+            </view>
+        </picker>
+        <view :class="[activityMenu[activitySub].activityStatus !== '已结束' ? 'open_activity' : '','activity_status']">
+            {{activityMenu[activitySub].activityStatus}}</view>
     </view>
+    <view class="mixCharts">
+        <canvas canvas-id="canvasMix" id="canvasMix" class="charts" disable-scroll="true" @touchstart="touchMix" @touchmove="moveMix"></canvas>
+    </view>
+    <view class="activity_info">
+        <view class="activity_count">
+            <image webp :src="getImg('order_bg1')"></image>
+            <label>累计销售额</label>
+            <text>{{activityAnalysis.cumulativeSales | moneyFormatFilter}}</text>
+        </view>
+        <view class="activity_count">
+            <image webp :src="getImg('order_bg4')"></image>
+            <label>累计活动销售额</label>
+            <text>{{activityAnalysis.cumulativeActivitySales | moneyFormatFilter}}</text>
+        </view>
+    </view>
+    <view class="activity_info_other">
+        <view class="activity_count">
+            <label>累计订单数：</label>
+            <text>{{activityAnalysis.cumulativeOrderNumber | moneyFormatFilter}}</text>
+        </view>
+        <view class="activity_count">
+            <label>新增会员数：</label>
+            <text>{{activityAnalysis.newMember | moneyFormatFilter}}</text>
+        </view>
+        <view class="activity_count">
+            <label>累计访问数：</label>
+            <text>{{activityAnalysis.cumulativeAccessNumber | moneyFormatFilter}}</text>
+        </view>
+        <view class="activity_count">
+            <label>新增客户数：</label>
+            <text>{{activityAnalysis.newCustomer | moneyFormatFilter}}</text>
+        </view>
+    </view>
+    <view class="sale_header">
+        <view class="ranking">
+            <image src="../../static/images/icon/sale_index.png"></image>
+            <text>排行榜</text>
+        </view>
+        <picker mode="selector" :range="indexMenu" :value="index" @change="selectIndex">
+            <view class="drop_down">
+                <text>{{indexMenu[indexVal]}}</text>
+                <image src="../../static/images/icon/drop_down1.png"></image>
+            </view>
+        </picker>
+
+    </view>
+    <view class="ranking_menu">
+        <view class="ranking_item" v-for="(item,index) in activityRankingList" :key="index" v-if="index<3">
+            <view class="item_num">
+                <image webp :src="getImg('index_'+(index+1))"></image>
+                <text>NO.{{index+1}}</text>
+            </view>
+            <text class="address">{{item.province}}</text>
+            <label>{{item.number | moneyFormatFilter}}</label>
+        </view>
+    </view>
+    <view class="contrast_wrapper">
+        <view class="contrast_header">
+            <image src="../../static/images/icon/contrast.png"></image>
+            <text>定向对比</text>
+        </view>
+        <view class="contrast_title">
+            <view class="contrast_date">
+                <text>A：{{currentStartDate}}</text>
+                <label>VS</label>
+                <text>B：{{currentEndDate}}</text>
+            </view>
+            <view class="select_date" @click="selectCalendar">选择日期</view>
+        </view>
+        <view class="activity_table">
+            <view class="table_left">
+                <view class="table_bar radius_top_left">
+                    <label>标题</label>
+                </view>
+                <view class="table_bar" v-for="(item,index) in activityComparison" :key="index">
+                    <label>{{item.comparisonTitle}}</label>
+                </view>
+            </view>
+            <view class="table_right">
+                <scroll-view class="" show-scrollbar="true" scroll-x="false" scroll-y="false" upper-threshold="50" lower-threshold="50" scroll-top="0" scroll-left="0" scroll-into-view="" scroll-with-animation="false" enable-back-to-top="false">
+                    <view class="table_content">
+                        <view class="table_title">
+                            <view>
+                                <label>日期A</label>
+                            </view>
+                            <view>
+                                <label>日期B</label>
+                            </view>
+                            <view class="radius_top_right">
+                                <label>B比A</label>
+                            </view>
+                        </view>
+                        <view class="table_val" v-for="(item,index) in activityComparison" :key="index">
+                            <view><text>{{item.preComparisonNumber | moneyFormatFilter}}</text></view>
+                            <view><text>{{item.afterComparisonNumber | moneyFormatFilter}}</text></view>
+                            <view :class="index == 3 ? 'radius_bottom_right' : '' "><text>{{item.proportion}}</text></view>
+                        </view>
+                    </view>
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+    <view class="selectDate">{{currentDate}}</view>
+    <u-calendar v-model="showCalendar" mode="range" @change="changeCalendar" :max-date="getMaxDate" @changeFirstDate="changeFirstDate"></u-calendar>
     <com-tabbar current="1"></com-tabbar>
+    <com-watermarker col="2" row="5" opacity="1" rotate="-30deg" color='#d6d5d5' :text="waterMarkerText" :flexHeight="flexHeight" :status="isWaterMarker"></com-watermarker>
 </view>

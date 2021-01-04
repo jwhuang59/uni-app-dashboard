@@ -1,55 +1,136 @@
 <view class="content">
-
     <view class="customer_rate">
         <view class="customer_rate_lis">
             <label>周留存率</label>
-            <text>23%</text>
-            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes" @touchend="hideNotes" data-text="这是一条注释这是一条注释这是一条注释"></image>
+            <view class="rate_icon">
+                <text>{{memberRetainedInfo.weeksRetentionRates}}</text>
+            </view>
+            <!-- <image src="../../static/images/icon/refresh.png" @touchstart="showNotes" @touchend="hideNotes" data-text="这是一条注释这是一条注释这是一条注释"></image> -->
+        </view>
+        <view class="customer_rate_lis">
+            <label>比上周</label>
+            <view class="rate_icon">
+                <text :class="memberRetainedInfo.retentionThanLastWeek === -1 ? 'down' : 'up'">{{memberRetainedInfo.retentionThanLastWeek}}个点</text>
+                <image src="../../static/images/icon/customer_down.png" v-if="memberRetainedInfo.retentionThanLastWeek === -1"></image>
+                <image src="../../static/images/icon/customer_up.png" v-else></image>
+            </view>
         </view>
         <view class="customer_rate_lis">
             <label>月留存率</label>
-            <text>23%</text>
-            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes"></image>
+            <view class="rate_icon">
+                <text>{{memberRetainedInfo.monthRetentionRates}}</text>
+            </view>
         </view>
         <view class="customer_rate_lis">
+            <label>比上月</label>
+            <view class="rate_icon">
+                <text :class="memberRetainedInfo.monthRetentionType === -1 ? 'down' : 'up'">{{memberRetainedInfo.retentionThanLastMonth}}个点</text>
+                <image src="../../static/images/icon/customer_down.png" v-if="memberRetainedInfo.monthRetentionType === -1"></image>
+                <image src="../../static/images/icon/customer_up.png" v-else></image>
+            </view>
+        </view>
+    </view>
+    <view class="customer_rate">
+        <view class="customer_rate_lis">
             <label>周复购率</label>
-            <text>23%</text>
-            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes"></image>
+            <view class="rate_icon">
+                <text>{{memberRetainedInfo.weeksRepurchaseRates}}</text>
+            </view>
+        </view>
+        <view class="customer_rate_lis">
+            <label>比上周</label>
+            <view class="rate_icon">
+                <text :class="memberRetainedInfo.repurchaseType === -1 ? 'down' : 'up'">{{memberRetainedInfo.repurchaseThanLastWeek}}个点</text>
+                <image src="../../static/images/icon/customer_down.png" v-if="memberRetainedInfo.repurchaseType === -1">
+                </image>
+                <image src="../../static/images/icon/customer_up.png" v-else></image>
+            </view>
         </view>
         <view class="customer_rate_lis">
             <label>月复购率</label>
-            <text>23%</text>
-            <image src="../../static/images/icon/refresh.png" @touchstart="showNotes"></image>
+            <view class="rate_icon">
+                <text>{{memberRetainedInfo.monthRepurchaseRates}}</text>
+            </view>
         </view>
-    </view>
-    <view class="channel_wrapper">
-        <view class="showPieChart">
-            <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showPieChart" id="showPieChart"
-                @touchstart="touchPie" @touchmove="movePie"></canvas>
-        </view>
-        <view class="channel_menu">
-            <view class="channel_item" v-for="(item,index) in pieSeries" :key="index">
-                <label :style="'background:'+item.color"></label>
-                <text>{{item.name}}</text>
-                <text>{{item.data}}</text>
-                <!-- <text>{{item.data}}</text> -->
+        <view class="customer_rate_lis">
+            <label>比上月</label>
+            <view class="rate_icon">
+                <text :class="memberRetainedInfo.monthRepurchaseType === -1 ? 'down' : 'up'">{{memberRetainedInfo.repurchaseThanLastMonth}}个点</text>
+                <image src="../../static/images/icon/customer_down.png" v-if="memberRetainedInfo.monthRepurchaseType === -1"></image>
+                <image src="../../static/images/icon/customer_up.png" v-else></image>
             </view>
         </view>
     </view>
-    <view class="consume_wrapper">
-        <view class="showRingChart">
-            <canvas :class="showCalendar ? 'hide_calendar' : ''" canvas-id="showRingChart" id="showRingChart"
-                @touchstart="touchRing" @touchmove="moveRing"></canvas>
+    <view class="time_wrapper">
+        <view class="date_wrapper">
+            <view class="select_time">
+                <image src="../../static/images/icon/date.png"></image>
+                <text>{{currentDate}}</text>
+            </view>
         </view>
-        <view class="consume_menu">
-            <view class="consume_item" v-for="(item,index) in ringSeries" :key="index">
-                <label :style="'background:'+item.color"></label>
-                <text>{{item.name}}</text>
-                <text>{{item.data}}</text>
-                <!-- <text>{{item.data}}</text> -->
+        <view class="refresh" @click="selectCalendar">
+            <text>选择日期</text>
+        </view>
+    </view>
+
+    <view class="customer_info">
+        <view class="customer_count">
+            <image webp :src="getImg('order_bg3')"></image>
+            <label>新增注册会员</label>
+            <view class="contrast_yes">
+                <text>{{memberAnalysisInfo.newMember | moneyFormatFilter}}</text>
+            </view>
+        </view>
+        <view class="customer_count">
+            <image webp :src="getImg('order_bg5')"></image>
+            <label>新增下单会员</label>
+            <view class="contrast_yes">
+                <text>{{memberAnalysisInfo.newCustomer| moneyFormatFilter}}</text>
+
             </view>
         </view>
     </view>
-    <com-notes :notesText='notesText' :left="left" :top="top" :width="width" :isNotes='isNotes'></com-notes>
+
+    <view class="register_channels">
+        <view class="title">注册渠道</view>
+        <view class="channel_wrapper">
+            <view class="showPieChart" :style="'height:' + canvasHeight + 'px' ">
+                <canvas v-show="!showCalendar" canvas-id="showPieChart" id="showPieChart" @touchstart="touchPie" @touchmove="movePie"></canvas>
+                <!-- <image :src="canvasImg0" class="pieImg" v-show="!showCanvas"></image> -->
+            </view>
+            <view class="channel_menu">
+                <view class="channel_item" v-for="(item,index) in memberAnalysisInfo.memberDistributions" :key="index">
+                    <label :style="'background:'+item.color"></label>
+                    <text>{{item.name}}</text>
+                    <text>{{item.proportion}}</text>
+                    <text class="percentage">{{item.newData}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="customer_consume">
+        <view class="title">会员消费</view>
+        <view class="consume_wrapper">
+            <view class="showRingChart" :style="'height:' + canvasHeight + 'px' ">
+                <canvas v-show="!showCalendar" canvas-id="showRingChart" id="showRingChart" @touchstart="touchRing" @touchmove="moveRing"></canvas>
+                <!-- <image :src="canvasImg" class="ringImg" v-show="!showCanvas"></image> -->
+            </view>
+            <view class="consume_menu">
+                <view class="consume_title">
+                    <text class="col"></text>
+                    <text>下单客户数</text>
+                    <text>消费占比</text>
+                </view>
+                <view class="consume_item" v-for="(item,index) in memberAnalysisInfo.memberConsumptionChart" :key="index">
+                    <text class="col">{{item.membershipGrade}}</text>
+                    <text>{{item.consumptionMembers}}</text>
+                    <text>{{item.salesProportion}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <u-calendar v-model="showCalendar" mode="range" @change="changeCalendar" :max-date="getMaxDate" @changeFirstDate="changeFirstDate"></u-calendar>
+    <com-notes :notesText='notesText' :left="noteLeft" :top="noteTop" :width="noteWidth" :isNotes='isNotes'></com-notes>
     <com-tabbar current="3"></com-tabbar>
+    <com-watermarker col="2" row="5" opacity="1" rotate="-30deg" color='#d6d5d5' :text="waterMarkerText" :flexHeight="flexHeight" :status="isWaterMarker"></com-watermarker>
 </view>

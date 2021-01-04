@@ -6,62 +6,77 @@
         {
             "path": "pages/home/index",
             "style": {
-                "navigationBarTitleText": "首页"
+                "navigationBarTitleText": "锅圈数坊"
             }
         },
         {
             "path": "pages/authorize/index",
             "style": {
-                "navigationBarTitleText": "登录"
+                "navigationBarTitleText": "锅圈数坊"
             }
         },
         {
             "path": "pages/live-data/index",
             "style": {
-                "navigationBarTitleText": "实时数据"
+                "navigationBarTitleText": "锅圈数坊",
+                "navigationBarBackgroundColor": "#276FFE",
+                "backgroundColor": "#F1F2F9",
+                "navigationBarTextStyle": "white"
             }
         },
         {
             "path": "pages/panel/index",
             "style": {
-                "navigationBarTitleText": "面板"
+                "navigationBarTitleText": "锅圈数坊"
             }
         },
         {
             "path": "pages/sale/index",
             "style": {
-                "navigationBarTitleText": "销售"
+                "navigationBarTitleText": "锅圈数坊",
+                "navigationBarBackgroundColor": "#276FFE",
+                "backgroundColor": "#F1F2F9",
+                "navigationBarTextStyle": "white"
             }
         },
         {
             "path": "pages/activity/index",
             "style": {
-                "navigationBarTitleText": "活动"
+                "navigationBarTitleText": "活动",
+                "navigationBarBackgroundColor": "#fff",
+                "backgroundColor": "#F1F2F9"
             }
         },
         {
             "path": "pages/customer/index",
             "style": {
-                "navigationBarTitleText": "客户"
+                "navigationBarTitleText": "客户",
+                "navigationBarBackgroundColor": "#fff",
+                "backgroundColor": "#F1F2F9"
             }
         },
         {
             "path": "pages/conversion/index",
             "style": {
-                "navigationBarTitleText": "转化"
+                "navigationBarTitleText": "锅圈数坊",
+                "navigationBarBackgroundColor": "#276FFE",
+                "navigationBarTextStyle": "white",
+                "backgroundColor": "#F1F2F9"
             }
         },
         {
             "path": "pages/sale-more/index",
             "style": {
-                "navigationBarTitleText": "销售排行",
+                "navigationBarTitleText": "锅圈数坊",
+                "navigationBarBackgroundColor": "#fff",
+                "backgroundColor": "#F1F2F9",
                 "pageOrientation": "landscape"
             }
         },
         {
             "path": "pages/no-found/index",
             "style": {
-                "navigationBarTitleText": "服务器异常"
+                "navigationBarTitleText": "锅圈数坊"
             }
         }
     ],
@@ -70,22 +85,32 @@
         "list": [
             {
                 "pagePath": "pages/sale/index",
+                "iconPath": "/static/images/tabbar/icon_sale.png",
+                "selectedIconPath": "/static/images/tabbar/icon_selectSale.png",
                 "text": "销售"
             },
             {
                 "pagePath": "pages/activity/index",
+                "iconPath": "/static/images/tabbar/icon_activity.png",
+                "selectedIconPath": "/static/images/tabbar/icon_selectActivity.png",
                 "text": "活动"
             },
             {
                 "pagePath": "pages/live-data/index",
+                "iconPath": "/static/images/tabbar/icon_livedata.png",
+                "selectedIconPath": "/static/images/tabbar/icon_selectLivedata.png",
                 "text": "实时数据"
             },
             {
                 "pagePath": "pages/customer/index",
+                "iconPath": "/static/images/tabbar/icon_customer.png",
+                "selectedIconPath": "/static/images/tabbar/icon_selectCustomer.png",
                 "text": "客户"
             },
             {
                 "pagePath": "pages/conversion/index",
+                "iconPath": "/static/images/tabbar/icon_conversion.png",
+                "selectedIconPath": "/static/images/tabbar/icon_selectConversion.png",
                 "text": "转化"
             }
         ],

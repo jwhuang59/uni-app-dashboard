@@ -20,7 +20,7 @@ export default {
         },
         color: {
             type: String,
-            default: 'black'
+            default: '#d6d5d5'
         },
         row: {
             type: [Number, String],
@@ -33,13 +33,11 @@ export default {
         flexHeight: {
             type: String,
             default: ''
+        },
+        status: {
+            type: Boolean,
+            default: true
         }
     }
-    // mounted(){
-    //     const flexInfo = uni.createSelectorQuery().select('.content');
-    //     flexInfo.boundingClientRect(data => {
-    //             this.flexHeight = data.height;
-    //     }).exec();
-    // }
 };
 </script>

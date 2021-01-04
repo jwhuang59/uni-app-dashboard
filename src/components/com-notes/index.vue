@@ -2,17 +2,17 @@
 <style lang="scss" src="./index.scss" scoped></style>
 <script>
 export default {
-    data(){
-        return{}
+    data() {
+        return {};
     },
     props: {
         notesText: {
             type: String,
-            default: '这是一条注释'
+            default: ''
         },
         width: {
             type: String,
-            default: '' 
+            default: ''
         },
         left: {
             type: String,
@@ -27,9 +27,6 @@ export default {
             default: false
         }
     },
-    methods: {
-        
-    },
-
+    methods: {}
 };
 </script>

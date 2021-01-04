@@ -1,16 +1,27 @@
-<div class="tabbar_wrap">
-    <view class="tabbar_wrap_item" v-for="(item, index) in tabList" :key="index">
-        <view class="navigator" :class="currentTabIndex == index ? 'on' : ''" @tap="switchTab(index,item.tabName)">
-            <block v-if="index != 2">
-                <view class="icon">
-                    <img class="tabIcon" :src="[ currentTabIndex == index ? item.selectSrc :  item.src ]" alt="" />
-                </view>
-                <view class="text" :style="[currentTabIndex == index ? { color: tintColor } : { color: color }]">{{ item.text }}</view>
-            </block>
-            <view class="active" v-else>
-                <text>{{ item.text }}</text>
+<!-- <cover-view class="tabbar_menu">
+    <cover-view class="tabbar_item" v-for="(item, index) in tabList" :key="index" @tap="switchTab(index,item.tabName)">
+        <cover-view :class="currentTabIndex == index ? 'on' : ''">
+            <cover-view class="icon">
+                <cover-image class="tabIcon" :src="[ currentTabIndex == index ? item.selectSrc :  item.src ]">
+                </cover-image>
+            </cover-view>
+            <cover-view class="text" :style="[currentTabIndex == index ? { color: selectColor } : { color: color }]">
+                {{ item.text }}</cover-view>
+        </cover-view>
+
+    </cover-view>
+</cover-view> -->
+
+<view class="tabbar_menu">
+    <view class="tabbar_item" v-for="(item, index) in tabList" :key="index" @tap="switchTab(index,item.tabName)">
+        <view :class="currentTabIndex == index ? 'on' : ''">
+            <view class="icon">
+                <image class="tabIcon" :src="[ currentTabIndex == index ? item.selectSrc :  item.src ]">
+                </image>
             </view>
+            <view class="text" :style="[currentTabIndex == index ? { color: selectColor } : { color: color }]">
+                {{ item.text }}</view>
         </view>
 
     </view>
-</div>
+</view>

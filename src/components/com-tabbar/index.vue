@@ -20,8 +20,8 @@ export default {
                 {
                     text: '实时数据',
                     tabName: 'liveData',
-                    src: '',
-                    selectSrc: ''
+                    src: '../../static/images/tabbar/icon_livedata.png',
+                    selectSrc: '../../static/images/tabbar/icon_selectLivedata.png'
                 },
                 {
                     text: '客户',
@@ -50,11 +50,11 @@ export default {
         },
         color: {
             type: String,
-            default: '#2D2D32'
+            default: '#404D57'
         },
-        tintColor: {
+        selectColor: {
             type: String,
-            default: '#42b983'
+            default: '#276FFE'
         }
     },
     mounted() {

@@ -23,6 +23,7 @@ const request = function (name = '', data = {}) {
     let { url, method = 'post', header = { 'content-type': 'application/json' }, pem = false, sld = true } = getApi(
         name
     );
+    const that = this;
     header = getHeader(header, data);
     url = BaseUrl + url;
     return new Promise((resolve, reject) => {
@@ -40,8 +41,10 @@ const request = function (name = '', data = {}) {
             success(res) {
                 if (res.data.success) {
                     resolve(res.data);
-                } else if (res.data.code === 3401) {
-                    // todo 跳转到登陆授权页面
+                } else if (res.data.code === 500) {
+                    // todo 请求超时
+                    that.jump('noFound');
+                    uni.hideLoading();
                 } else {
                     errorHandler(res, reject, pem);
                 }

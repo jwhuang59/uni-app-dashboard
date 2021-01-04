@@ -4,14 +4,27 @@
 let that;
 export default {
     data() {
-        return {};
+        return {
+            checked: true
+        };
     },
     onLoad() {
         that = this;
     },
     methods: {
+        checkFunc() {
+            this.checked = !this.checked;
+        },
         // 判断是否开启授权设置
         bindUserInfo(e) {
+            if (!this.checked) {
+                uni.showToast({
+                    title: '请同意保护数据安全协议',
+                    icon: 'none',
+                    duration: 3000
+                });
+                return false;
+            }
             if (e.detail.userInfo) {
                 this.authorization(e.detail);
             } else {
