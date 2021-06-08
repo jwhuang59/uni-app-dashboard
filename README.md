@@ -1,23 +1,14 @@
-# gqsh-mp-dashboard
+## uni-app-dashboard
 
-## Project setup
+#### uni-app开发小程序数据看板，实时数据刷新，T-1历史数据
 
+##### 运行
 ```
 yarn install
-```
-
-### Compiles and hot-reloads for development
-
-```
 yarn serve
 ```
 
-### Compiles and minifies for production
-
+##### 打包
 ```
 yarn build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
